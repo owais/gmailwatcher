@@ -1,0 +1,7 @@
+*.pyc
+debian/gmailwatcher/*
+debian/gmailwatcher
+debian/gmailwatcher.debhelper.log
+debian/gmailwatcher.substvars
+.bzr
+.bzrignore

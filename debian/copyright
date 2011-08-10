@@ -1,0 +1,14 @@
+Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=135
+Name: gmailwatcher
+Maintainer: Owais Lone <hello@owaislone.org>
+Source: https://launchpad.net/gmailwatcher
+
+Files: *
+Copyright: (C) 2010 Owais Lone hello@owaislone.org
+Copyright: (C) 2010 Owais Lone hello@owaislone.org</property>
+Copyright: (C) 2010 Rosetta Contributors and Canonical Ltd 2010
+Copyright: (C) 2011 Rosetta Contributors and Canonical Ltd 2011
+Copyright: (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+License: GPL-3
+ The full text of the GPL is distributed in
+ /usr/share/common-licenses/GPL-3 on Debian systems.

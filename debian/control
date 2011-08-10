@@ -1,0 +1,26 @@
+Source: gmailwatcher
+Section: mail
+Priority: standard
+Maintainer: Owais Lone <hello@owaislone.org>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+XS-Python-Version: current
+Homepage: http://launchpad.net/gmailwatcher
+
+Package: gmailwatcher
+Architecture: all
+XB-Python-Version: ${python:Versions}
+Depends: ${misc:Depends},
+ ${python:Depends},
+ python-gobject,
+ gir1.2-gtk-3.0,
+ gir1.2-glib-2.0,
+ gir1.2-notify-0.7,
+ gir1.2-indicate-0.5,
+ gir1.2-unity-3.0,
+ gir1.2-webkit-3.0,
+ gir1.2-unity-3.0,
+ gir1.2-unity-3.0,
+ python-keyring,
+Description: A gmail notifier with multiple accounts and instant notifications
+ A gmail and google apps mail notifier with instant notifications, multiple accounts and summary view.

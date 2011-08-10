@@ -1,0 +1,5 @@
+gmailwatcher.desktop /usr/share/applications
+bin/gmailwatcher /usr/bin
+gmailwatcher /opt/owaislone/
+gmailwatcher/data/icons/ /usr/share/
+gmailwatcher/data/indicators/ /usr/share/
