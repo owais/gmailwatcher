@@ -1,37 +1,40 @@
-gmailwatcher (11.08.6) oneiric; urgency=low
-    * New release.
-    * Fixed a bug in WebView which caused multiple instances of same email
-    * Devised an efficient way to only notify about emails once.
- -- Owais Lone <hello@owaislone.org>  Mon, 09 Aug 2011 23:39:11 +0530
+gmailwatcher (11.08.15) oneiric; urgency=low
+    * Added some more doc strings
+    * Changed gir deps 
+ -- Owais Lone <hello@owaislone.org>  Sat, 13 Aug 2011 2:49:00 +0530
 
-gmailwatcher (11.08.4) oneiric; urgency=low
-    * New release.
-    * Added startup options
-    * Added live loading of changes to preferences (using gmailwatcher UI)
-    * Changed add_account js function to handle previously present account in a better way
+gmailwatcher (11.08.14) oneiric; urgency=low
+    * New Release
+    * Fixed bug in preferences dialog
+    * Now threads restart only when account changes
+    * Added some doc strings
+ -- Owais Lone <hello@owaislone.org>  Fri, 12 Aug 2011 16:03:09 +0530
 
- -- Owais Lone <hello@owaislone.org>  Mon, 09 Aug 2011 23:39:11 +0530
+gmailwatcher (11.08.13) oneiric; urgency=low
+    * Changed dependency value to let it install on oneiric
+ -- Owais Lone <hello@owaislone.org>  Fri, 12 Aug 2011 2:15:09 +0530
 
-gmailwatcher (11.08.3) oneiric; urgency=low
+gmailwatcher (11.08.12) oneiric; urgency=low
+    * Some theme changes
+ -- Owais Lone <hello@owaislone.org>  Fri, 12 Aug 2011 00:15:09 +0530
 
-  * Added Icons and Ubuntu Messaging Menu Entry 
+gmailwatcher (11.08.11) oneiric; urgency=low
+    * Added some notifications.
+ -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 20:14:45 +0530
 
- -- Owais Lone <hello@owaislone.org>  Mon, 09 Aug 2011 18:54:11 +0530
+gmailwatcher (11.08.10) oneiric; urgency=low
+    * Now time checks are saved per label
+ -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 17:11:18 +0530
 
-gmailwatcher (11.08.2) oneiric; urgency=low
+gmailwatcher (11.08.9) oneiric; urgency=low
+    * Faster startup especially when already running AKA bring up unique instance
+ -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 12:15:11 +0530
 
-  * Updated dependencies, Made some improvements 
+gmailwatcher (11.08.8) oneiric; urgency=low
+    * Disabled test emails
+ -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 11:28:11 +0530
 
- -- Owais Lone <hello@owaislone.org>  Mon, 08 Aug 2011 22:10:11 +0530
+gmailwatcher (11.08.7) oneiric; urgency=low
+    * Worked on the theme a bit
+ -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 11:22:11 +0530
 
-gmailwatcher (11.08.1) oneiric; urgency=low
-
-  * Updated dependencies, Made some improvements 
-
- -- Owais Lone <hello@owaislone.org>  Mon, 08 Aug 2011 22:10:11 +0530
-
-gmailwatcher (11.08-1) oneiric; urgency=low
-
-  * Initial release of the reweite 
-
- -- Owais Lone <hello@owaislone.org>  Mon, 08 Aug 2011 20:15:19 +0530

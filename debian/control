@@ -1,7 +1,8 @@
 Source: gmailwatcher
 Section: mail
 Priority: standard
-Maintainer: Owais Lone <hello@owaislone.org>
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Owais Lone <hello@owaislone.org>
 Build-Depends: debhelper (>= 8.0.0)
 Standards-Version: 3.9.2
 XS-Python-Version: current
@@ -16,10 +17,10 @@ Depends: ${misc:Depends},
  gir1.2-gtk-3.0,
  gir1.2-glib-2.0,
  gir1.2-notify-0.7,
- gir1.2-indicate-0.5,
+ gir1.2-indicate-0.6,
  gir1.2-unity-3.0,
  gir1.2-webkit-3.0,
- gir1.2-unity-3.0,
+ gir1.2-unity-4.0,
  gir1.2-unity-3.0,
  python-keyring,
 Description: A gmail notifier with multiple accounts and instant notifications

@@ -20,7 +20,7 @@ body {
 #sidebar {
     position:fixed;
     width:180px;
-    background: #3c3b37;
+    background: #53514A;
     min-height:100%;
     height:auto;
     display:inline;
@@ -36,17 +36,14 @@ body {
 
 select#accounts {
     -webkit-appearance: button;
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.5, #53514A));
     margin: 5px;
-    background: -webkit-gradient(linear, left top, left bottom, to(#403F3A), from(#393835), color-stop(0.6, #393835));
     padding:10px 5px;
     font-weight:bold;
     width:90%;
-    border:solid thin #222;
+    border:solid thin  #333;
     outline:none;
     color:#f2f1f0;
-    background-image: url('img/arrow-down.png');
-    background-position: right;
-    background-repeat:no-repeat;
 }
 
 .folders {
@@ -57,10 +54,9 @@ select#accounts {
     color: #f3f2f1;
     text-align:right;
     padding:10px;
-    padding-right:15px;
+    padding-right:10px;
     border-bottom: solid thin #333;
-    #background: -webkit-gradient(linear, left top, left bottom, to(#403F3A), from(#393835), color-stop(0.6, #393835));
-    background: -webkit-gradient(linear, left top, left bottom, from(#393835), to(#403F3A), color-stop(0.1, #393835));
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to( #484741), color-stop(0.1,  #53514A));
     text-transform: uppercase;
     font-size:10px;
     font-weight:bold;
@@ -68,22 +64,34 @@ select#accounts {
 }
 
 .folder:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#403F3A), to(#393835), color-stop(0.1, #403F3A));
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.6, #53514A));
 }
 
 .folder:active {
-    background: -webkit-gradient(linear, left top, left bottom, from(#393835), to(#403F3A), color-stop(0.9, #403F3A));
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.3, #53514A));
 }
 
-.folder.selected {
+.folder:after {
+    content: '';
+    position:relative;
+    float:right;
+    right:-16px;
+    width:15px;
+    height:15px;
+}
+.folder.selected:after {
+    content: '';
     background-image: url('img/arrow.png');
-    background-position: right;
     background-repeat:no-repeat;
 }
 
 .folder.unseen {
     color: #FFCD27;
     text-shadow: #ffcd27 0 0 15px;
+}
+
+.folder:last-child {
+    box-shadow: #333 -1px 1px 1px;
 }
 
 ul.emails {

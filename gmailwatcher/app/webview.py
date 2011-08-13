@@ -21,7 +21,6 @@ from gmailwatcher.lib.helpers import get_theme
 
 theme_file = get_theme('default')
 
-
 class WebView(WebKit.WebView):
     def add_account(self, account, display_name, folders):
         folders = [folder for folder in folders]

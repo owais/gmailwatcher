@@ -31,16 +31,21 @@ class Watcher(threading.Thread):
     kill_now = False
     IDLE_TIMEOUT = 29  # Mins
 
-    def __init__(self, username, password, labels, last_checked):
+    def __init__(self, username, password, folders, last_checks):
         self.username = username
         self.password = password
-        self.labels = [L[1] for L in labels if L[0]]
-        self.last_checked = last_checked
-        self.last_checked_str = time.strftime("%d-%b-%Y",time.localtime(self.last_checked))
-        print self.last_checked_str
+        self.folders = [F[1] for F in folders if F[0]]
+        self.last_checks = last_checks
+        self.last_checks_str = {}
+        for folder, last_check in self.last_checks.items():
+            last_check_str = time.strftime("%d-%b-%Y", time.localtime(last_check))
+            self.last_checks_str[folder] = last_check_str
         threading.Thread.__init__(self)
 
     def run(self):
+        """
+        Authenticate IMAP, check for unseen mail and then wait for new mail
+        """
         self.imap = imaplib2.IMAP4_SSL("imap.gmail.com")
         try:
             self.imap.login(self.username, self.password)
@@ -55,6 +60,10 @@ class Watcher(threading.Thread):
         self.callback = callback
 
     def get_mail_headers(self, id):
+        """
+        Given mail ID, fetch headers along with gmail specific info
+        and return in key:value form
+        """
         typ, header = self.imap.uid(
             "FETCH",
             id,
@@ -98,9 +107,15 @@ class Watcher(threading.Thread):
         return results
 
     def handle_new_mail(self):
-        for label in self.labels:
-            self.imap.select(label)
-            typ, data = self.imap.uid('SEARCH', None, '(SINCE %s UNSEEN)' % self.last_checked_str)
+        """
+        Called when activity is detected on gmail server.
+        Check for mail in all subscribed folders and
+        send callbacks to main app with info about new mail.
+        """
+        for folder in self.folders:
+            self.imap.select(folder)
+            last_check = self.last_checks_str[folder]
+            typ, data = self.imap.uid('SEARCH', None, '(SINCE %s UNSEEN)' % last_check)
             new_mail = {}  # thread_id : message
             for uid in data[0].split():
                 if not uid in self.seen_mail:
@@ -111,7 +126,7 @@ class Watcher(threading.Thread):
                     mail_list.append(mail_headers)
                     new_mail[thread_id] = mail_list
             if new_mail:
-                GObject.idle_add(self.callback, self.username, label, new_mail)
+                GObject.idle_add(self.callback, self.username, folder, new_mail)
         self.imap.select("[Gmail]/All Mail")
 
     def kill(self):
@@ -122,7 +137,9 @@ class Watcher(threading.Thread):
         self.stop_waiting_event.set()
 
     def wait_for_server(self):
-        print 'waiting'
+        """
+        Register for IDLE and check call handle_new_mail when activity detected in gmail 
+        """
         self.IDLEArgs = ''
         self.stop_waiting_event.clear()
         self.imap.select("[Gmail]/All Mail")
@@ -146,6 +163,6 @@ def new_watcher_thread(account, values):
     watcher = Watcher(account,
                       values['password'],
                       values['folders'],
-                      values['last_checked'])
-    watcher.setDaemon(True)
+                      values['last_checks'])
+    watcher.setDaemon(True) # So that main app can exit even if threads have not finished
     return watcher

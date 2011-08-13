@@ -15,12 +15,9 @@
 ### END LICENSE
 
 from gi.repository import Indicate, Unity
-import gettext
 #from gettext import gettext as _
 
 from gmailwatcher.lib.helpers import get_desktop_file
-gettext.textdomain('gmailwatcher')
-
 
 desktop_file = get_desktop_file() 
 
@@ -29,6 +26,7 @@ class Indicator:
     def __init__(self):
         self.launcher_entry = Unity.LauncherEntry.get_for_desktop_file(desktop_file)
         #self.launcher_entry.connect('user-display', self.reset_indicators)
+        # FIXME: Find a signal emitted by Unity LauncherEntry when clicked
         self.server = Indicate.Server()
         self.server.set_type("message.mail")
         self.server.set_desktop_file(desktop_file)

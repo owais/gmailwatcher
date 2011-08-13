@@ -27,7 +27,7 @@ CONFIG_FILE = "gmailwatcher.conf"
 BUILDER_PATH = 'data/ui/'
 THEME_PATH = 'data/themes/'
 THEME_INDEX = 'main.html'
-DEFAULT_LAST_CHECKED = now() - 259200.0  #2 days
+DEFAULT_LAST_CHECK = now() - 2714331 # Go one month back
 DEFAULT_preferences = {
     'accounts': {},
     'preferences': {
@@ -103,10 +103,13 @@ def load_preferences():
     except ValueError:
         return DEFAULT_preferences
 
-    for email, value in preferences['accounts'].items():
+    for email, values in preferences['accounts'].items():
         password = get_password(email)
-        value['password'] = password
-        value['last_checked'] = value.get('last_checked', DEFAULT_LAST_CHECKED)
+        values['password'] = password
+        last_checks = values.get('last_checks',{})
+        for folder in values['folders']:
+            last_checks[folder[1]] = last_checks.get(folder[1], DEFAULT_LAST_CHECK)
+        values['last_checks'] = last_checks
     return preferences
 
 

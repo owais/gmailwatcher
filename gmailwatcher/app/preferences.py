@@ -48,6 +48,7 @@ class PreferencesDialog(Gtk.Dialog):
         self.folder_store = self.builder.get_object('folder_store')
         self.account_store = self.builder.get_object('account_store')
 
+        self.accounts_updated = False
         self.preferences = {}
         self.load_preferences()
 
@@ -75,7 +76,7 @@ class PreferencesDialog(Gtk.Dialog):
     def validate_form(self):
         return self.validate_password() and self.validate_email()
 
-    def get_mail_labels(self, widget, data=None):
+    def get_mail_folders(self, widget, data=None):
         email = self.email_form.get_text()
         password = self.password_form.get_text()
         try:
@@ -101,12 +102,14 @@ class PreferencesDialog(Gtk.Dialog):
         accounts[self.email_form.get_text()] = account
         self.preferences['accounts'] = accounts
         self.save_preferences()
+        self.accounts_updated = True
 
     def save_preferences(self):
         save_preferences(self.preferences)
 
     def load_preferences(self):
         self.preferences = load_preferences()
+        self.account_store.clear()
         for account in self.preferences['accounts'].keys():
             self.account_store.append([account])
         autostart = self.preferences['preferences']['autostart']
@@ -172,11 +175,10 @@ class PreferencesDialog(Gtk.Dialog):
         set_autostart(autostart)
         self.preferences['preferences']['autostart'] = autostart
         self.save_preferences()
-    '''
+
     def on_delete(self, widget, data=None):
         self.dialog.hide()
         return True
-    '''
 
 def new_preferences_dialog():
     return PreferencesDialog()

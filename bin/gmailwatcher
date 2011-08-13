@@ -15,10 +15,27 @@
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 ### END LICENSE
 
-
 import os
 import sys
+from gi.repository import Gio
 
+
+# First check for instances, only then move forward.
+def activate_application(application):
+    try:
+        mainapp.present()
+    except NameError:
+        pass
+
+g_app = Gio.Application.new('org.owaislone.gmailwatcher', 0)
+g_app.connect('activate', activate_application)
+g_app.run(sys.argv)
+if g_app.get_is_remote():
+    #Quit if another instace is running.
+    sys.exit()
+
+# Start the application now
+# Setup project paths
 OPT_ROOT_PATH = '/opt/owaislone/'
 CURRENT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if CURRENT_PATH.startswith('/usr'):
@@ -27,31 +44,12 @@ else:
     sys_path = CURRENT_PATH
 sys.path.insert(0, sys_path)
 
-from gi.repository import GObject, GLib,  Gio
-
+from gi.repository import GObject
 from gmailwatcher.app.main_window import MainApp
 
 GObject.threads_init()
-GLib.set_application_name('Gmail Watcher')
-GLib.set_prgname('gmailwatcher')
 
+loop = GObject.MainLoop()
+mainapp = MainApp(main_loop=loop)
+mainapp.run()
 
-def main():
-    def activate_application(application):
-        try:
-            mainapp.present()
-        except NameError:
-            pass
-
-    g_app = Gio.Application.new('org.owaislone.gmailwatcher', 0)
-    g_app.connect('activate', activate_application)
-    g_app.run(sys.argv)
-    if g_app.get_is_remote():
-        #Quit if another instace is running.
-        return
-    loop = GObject.MainLoop()
-    mainapp = MainApp(main_loop=loop)
-    mainapp.run()
-
-if __name__ == '__main__':
-    main()
