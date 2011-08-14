@@ -1,16 +1,16 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # Copyright (C) 2011 Owais Lone hello@owaislone.org
-# This program is free software: you can redistribute it and/or modify it 
-# under the terms of the GNU General Public License version 3, as published 
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
-# 
-# This program is distributed in the hope that it will be useful, but 
-# WITHOUT ANY WARRANTY; without even the implied warranties of 
-# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
 # PURPOSE.  See the GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License along 
+#
+# You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 ### END LICENSE
 
@@ -38,7 +38,10 @@ class Watcher(threading.Thread):
         self.last_checks = last_checks
         self.last_checks_str = {}
         for folder, last_check in self.last_checks.items():
-            last_check_str = time.strftime("%d-%b-%Y", time.localtime(last_check))
+            last_check_str = time.strftime(
+                    "%d-%b-%Y",
+                    time.localtime(last_check)
+                    )
             self.last_checks_str[folder] = last_check_str
         threading.Thread.__init__(self)
 
@@ -85,7 +88,8 @@ class Watcher(threading.Thread):
         results['date'] = header_data['date']
         results['time'] = time.mktime(parsedate(results['date']))
         match = re.search(
-            'X-GM-THRID (?P<THRID>\d+) X-GM-MSGID (?P<MSGID>\d+) X-GM-LABELS \((?P<LABELS>.*)\) UID',
+            'X-GM-THRID (?P<THRID>\d+) X-GM-MSGID (?P<MSGID>\d+) '
+            'X-GM-LABELS \((?P<LABELS>.*)\) UID',
             header[0][0])
         results['msg_id'] = match.groupdict()['MSGID']
         results['thread_id'] = match.groupdict()['THRID']
@@ -115,7 +119,11 @@ class Watcher(threading.Thread):
         for folder in self.folders:
             self.imap.select(folder)
             last_check = self.last_checks_str[folder]
-            typ, data = self.imap.uid('SEARCH', None, '(SINCE %s UNSEEN)' % last_check)
+            typ, data = self.imap.uid(
+                    'SEARCH',
+                    None,
+                    '(SINCE %s UNSEEN)' % last_check
+                    )
             new_mail = {}  # thread_id : message
             for uid in data[0].split():
                 if not uid in self.seen_mail:
@@ -126,7 +134,12 @@ class Watcher(threading.Thread):
                     mail_list.append(mail_headers)
                     new_mail[thread_id] = mail_list
             if new_mail:
-                GObject.idle_add(self.callback, self.username, folder, new_mail)
+                GObject.idle_add(
+                        self.callback,
+                        self.username,
+                        folder,
+                        new_mail
+                        )
         self.imap.select("[Gmail]/All Mail")
 
     def kill(self):
@@ -138,7 +151,8 @@ class Watcher(threading.Thread):
 
     def wait_for_server(self):
         """
-        Register for IDLE and check call handle_new_mail when activity detected in gmail 
+        Register for IDLE and check call handle_new_mail when
+        activity detected in gmail
         """
         self.IDLEArgs = ''
         self.stop_waiting_event.clear()
@@ -164,5 +178,5 @@ def new_watcher_thread(account, values):
                       values['password'],
                       values['folders'],
                       values['last_checks'])
-    watcher.setDaemon(True) # So that main app can exit even if threads have not finished
+    watcher.setDaemon(True)
     return watcher

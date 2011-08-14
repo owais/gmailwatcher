@@ -1,16 +1,16 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # Copyright (C) 2011 Owais Lone hello@owaislone.org
-# This program is free software: you can redistribute it and/or modify it 
-# under the terms of the GNU General Public License version 3, as published 
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
-# 
-# This program is distributed in the hope that it will be useful, but 
-# WITHOUT ANY WARRANTY; without even the implied warranties of 
-# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
 # PURPOSE.  See the GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License along 
+#
+# You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 ### END LICENSE
 
@@ -28,6 +28,10 @@ from gmailwatcher.lib import consts
 
 gettext.textdomain('gmailwatcher')
 Notify.init('gmailwatcher')
+GObject.set_prgname('ggggname')
+GObject.set_application_name('Gmailwatcher')
+Gtk.init([])
+
 
 class MainApp:
     """
@@ -41,7 +45,7 @@ class MainApp:
         self.builder.connect_signals(self)
         self.main_window = self.builder.get_object('mainwindow')
         self.about_dialog = self.builder.get_object('aboutdialog')
-        self.about_dialog.connect('close',self.on_about_close)
+        self.about_dialog.connect('close', self.on_about_close)
         self.webview = new_webview()
         self.webview.connect('document-load-finished', self.setup_webkit)
         self.webview_container = self.builder.get_object('webview_container')
@@ -52,7 +56,7 @@ class MainApp:
         self.prefs.dialog.set_transient_for(self.main_window)
         self.watchers = {}
 
-        self.indicator = new_application_indicator(self)  
+        self.indicator = new_application_indicator(self)
 
         self.finish_initialization()
         if not self.prefs.preferences['accounts']:
@@ -68,7 +72,7 @@ class MainApp:
                 consts.start[1],
                 consts.icon_name
             )
-    
+
     # Initializers and deployers
     def finish_initialization(self):
         """
@@ -97,7 +101,7 @@ class MainApp:
         """
         starts a new thread for account
         """
-        self.watchers[account] = w= gmail_watcher.new_watcher_thread(
+        self.watchers[account] = w = gmail_watcher.new_watcher_thread(
             account,
             values
         )
@@ -107,15 +111,15 @@ class MainApp:
     def setup_watchers(self):
         """
         Deploys threads for all accounts and adds GObject watch for them.
-        GObject watch restarts a thread every 2 minutes in case something goes wrong
-        like no internet connection
+        GObject watch restarts a thread every 2 minutes in case something goes
+        wrong like no internet connection
         """
         for account, values in self.prefs.preferences['accounts'].items():
             if not account in self.watchers:
                 self.deploy_watcher(account, values)
 
-        # FIXME: Possible better way to handle that?
-        GObject.timeout_add_seconds(60*2, self.check_watchers)
+        # FIXME: Possible better way to handle this?
+        GObject.timeout_add_seconds(60 * 2, self.check_watchers)
 
     def setup_webkit(self, *args, **kwargs):
         """
@@ -131,7 +135,7 @@ class MainApp:
 
     def check_watchers(self):
         """
-        Restarts a watcher thread in case it dies for some reason 
+        Restarts a watcher thread in case it dies for some reason
         """
         for account, watcher in self.watchers.items():
             if not watcher.isAlive():
@@ -142,11 +146,12 @@ class MainApp:
     def update_last_checked_time(self, account, folder):
         """
         Updates last checked date of label.
-        Gmailwatcher doesn't notify about email older than last checked date    
+        Gmailwatcher doesn't notify about email older than last checked date
         """
         today = time.mktime(time.localtime())
-        if today > self.prefs.preferences['accounts'][account]['last_checks'][folder]:
-            self.prefs.preferences['accounts'][account]['last_checks'][folder] = today
+        account_dict = self.prefs.preferences['accounts'][account]
+        if today > account_dict['last_checks'][folder]:
+            account_dict['last_checks'][folder] = today
             self.prefs.save_preferences()
 
     # Thread callbacks
@@ -165,7 +170,7 @@ class MainApp:
             self.update_last_checked_time(account, folder)
             self.webview.new_mail(account, folder, thread_id, mail)
 
-        if not self.main_window.is_active():  #FIXME: Verify Behavior
+        if not self.main_window.is_active():  # FIXME: Verify Behavior
             self.indicator.new_mail(account, len(new_mail))
 
         if len(notifications) > 2:
@@ -177,7 +182,6 @@ class MainApp:
         else:
             for N in notifications:
                 self.notify(N[0], N[1], N[2])
-
 
     # Gtk/UI related functions
     def run(self):
@@ -235,4 +239,3 @@ class MainApp:
             consts.quit[1],
             consts.icon_name
         )
-

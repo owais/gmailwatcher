@@ -1,16 +1,16 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # Copyright (C) 2011 Owais Lone hello@owaislone.org
-# This program is free software: you can redistribute it and/or modify it 
-# under the terms of the GNU General Public License version 3, as published 
+# This program is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
-# 
-# This program is distributed in the hope that it will be useful, but 
-# WITHOUT ANY WARRANTY; without even the implied warranties of 
-# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR 
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranties of
+# MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR
 # PURPOSE.  See the GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License along 
+#
+# You should have received a copy of the GNU General Public License along
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 ### END LICENSE
 
@@ -21,17 +21,18 @@ import keyring
 from time import time as now
 from gi.repository import GLib
 
+
 USER_CONFIG_DIR = GLib.get_user_config_dir()
 CONFIG_DIR = "gmailwatcher"
 CONFIG_FILE = "gmailwatcher.conf"
 BUILDER_PATH = 'data/ui/'
 THEME_PATH = 'data/themes/'
 THEME_INDEX = 'main.html'
-DEFAULT_LAST_CHECK = now() - 2714331 # Go one month back
+DEFAULT_LAST_CHECK = now() - 2714331  # Go one month back
 DEFAULT_preferences = {
     'accounts': {},
     'preferences': {
-        'autostart':True,
+        'autostart': True,
     }
 }
 
@@ -42,7 +43,7 @@ def get_base_path():
 
 def get_builder(builder):
     return os.path.join(get_base_path(), BUILDER_PATH, builder)
-    
+
 
 def get_theme(theme):
     return os.path.join(get_base_path(), THEME_PATH, theme, THEME_INDEX)
@@ -53,10 +54,15 @@ def get_desktop_file():
     if base_path.startswith('/opt/owaislone/'):
         return '/usr/share/applications/gmailwatcher.desktop'
     else:
-        return os.path.join(os.path.dirname(base_path), 'gmailwatcher.desktop') 
+        return os.path.join(
+                os.path.dirname(base_path),
+                'gmailwatcher.desktop'
+                )
+
 
 def get_password(email):
     return keyring.get_password('gmailwatcher', email) or ''
+
 
 def set_password(email, password):
     keyring.set_password('gmailwatcher', email, password)
@@ -106,9 +112,12 @@ def load_preferences():
     for email, values in preferences['accounts'].items():
         password = get_password(email)
         values['password'] = password
-        last_checks = values.get('last_checks',{})
+        last_checks = values.get('last_checks', {})
         for folder in values['folders']:
-            last_checks[folder[1]] = last_checks.get(folder[1], DEFAULT_LAST_CHECK)
+            last_checks[folder[1]] = last_checks.get(
+                    folder[1],
+                    DEFAULT_LAST_CHECK
+                    )
         values['last_checks'] = last_checks
     return preferences
 
@@ -123,14 +132,19 @@ def set_autostart(set):
         source = file.read()
         file.close()
         dest_file = os.path.join(autostart_dir, "gmailwatcher.desktop")
-        dest = open(dest_file,'w')
+        dest = open(dest_file, 'w')
         dest.write(source)
         dest.close()
     else:
         os.system('rm ' + os.path.join(autostart_dir, "gmailwatcher.desktop"))
 
+
 def get_autostart():
-    autostart_file = os.path.join(USER_CONFIG_DIR, "autostart", "gmailwatcher.desktop")
+    autostart_file = os.path.join(
+            USER_CONFIG_DIR,
+            "autostart",
+            "gmailwatcher.desktop"
+            )
     if os.path.exists(autostart_file):
         return True
     else:

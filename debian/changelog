@@ -1,3 +1,11 @@
+gmailwatcher (11.08.17~1) oneiric; urgency=low
+    * Bumped dependency version
+ -- Owais Lone <hello@owaislone.org>  Sat, 13 Aug 2011 21:05:00 +0530
+
+gmailwatcher (11.08.16) oneiric; urgency=low
+    * Improved PreferencesDialog
+ -- Owais Lone <hello@owaislone.org>  Sat, 13 Aug 2011 13:01:34 +0530
+
 gmailwatcher (11.08.15) oneiric; urgency=low
     * Added some more doc strings
     * Changed gir deps 

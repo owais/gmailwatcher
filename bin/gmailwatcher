@@ -19,7 +19,6 @@ import os
 import sys
 from gi.repository import Gio
 
-
 # First check for instances, only then move forward.
 def activate_application(application):
     try:
@@ -33,6 +32,7 @@ g_app.run(sys.argv)
 if g_app.get_is_remote():
     #Quit if another instace is running.
     sys.exit()
+
 
 # Start the application now
 # Setup project paths
