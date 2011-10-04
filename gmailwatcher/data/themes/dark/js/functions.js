@@ -22,7 +22,7 @@ var add_account = function(account) {
     });
 
     var folders_list = []
-    for (i in folders) {    
+    for (i in folders) {
         folder_id = email+'_'+folders[i]
         if (old_folders.indexOf(folder_id) == -1) {
             folders_list.push({
@@ -31,8 +31,9 @@ var add_account = function(account) {
             });
         }
     };
+
     $('#folderTmpl').tmpl(folders_list).appendTo('.folders[id='+email+']');
-    $('option[id='+email+']').change();
+    show_account(email);
 };
 
 var new_email = function(mail) {
@@ -44,11 +45,9 @@ var new_email = function(mail) {
     if (thread.length > 0) {
         email.find('.email-body').appendTo(thread);
     } else {
-        thread = $('.emails[id='+account+']');
-        email.prependTo(thread);
-
+        mail_list = $('.emails[id='+account+']');
+        email.prependTo(mail_list);
     };
-
     if ($('.folder.selected').attr('id') != account+'_'+folder) {
         email.hide();
         $('.folder[id='+account+'_'+folder+']').addClass('unseen');
@@ -61,16 +60,11 @@ var show_account = function(account) {
     $('ul.folders').hide();
     $('ul.folders[id='+account+']').show();
     $('ul.folders[id='+account+']').children().first().click();
-    $('.account-tab').removeClass('selected');
-    account = $('option[id='+account+']');
-    account.addClass('selected');
-    display_name = account.text();
-    $('#accounts').val(display_name);
 };
 
 var test_data = function() {
     add_account({'account':'loneowais@gmail.com','display_name':'Personal','folders':['G+','inbox','LP-Bugs','facebook','Ubuntu/Ayatana', 'Ubuntu/AyatanaUbuntu/AyatanaUbuntu/AyatanaAyatana']});
-    add_account({'account':'owaislone@odeskps.com','display_name':'Work','folders':['facebook','Ubuntu/Ayatana', 'Ubuntu/AyatanaUbuntu/AyatanaUbuntu/AyatanaAyatana']});
+    //add_account({'account':'hello@owaislone.org','display_name':'Work','folders':['facebook','Ubuntu/Ayatana', 'Ubuntu/AyatanaUbuntu/AyatanaUbuntu/AyatanaAyatana']});
 
     var i=0;
 
@@ -87,6 +81,13 @@ new_email({"thread_id": "13762ds56674453447813",  "mail": [{"labels": [], "from"
     };
 };
 
+var theme = {};
+theme.set_colors = function(color) {
+  $('#sidebar, #sidebar *').css('background', color.bg)
+  $('#sidebar, #sidebar *').css('border-color', color.border)
+  $('#sidebar, #sidebar *').css('color', color.color)
+};
+
 
 $(document).ready(function() {
 
@@ -99,11 +100,6 @@ $(document).ready(function() {
         $(this).removeClass('unseen');
     });
 
-    $('#accounts').live('change', function(event) {
-        var account = $(this).find('option:selected').attr('id');
-        show_account(account);
-    });
-
     $('dt').live('click', function(){
         dd = $(this).next();
         if ($(dd).is(':hidden')) {
@@ -112,7 +108,7 @@ $(document).ready(function() {
         else {
             $(dd).slideUp();
         }
-    }); 
+    });
    //test_data()
 });
 

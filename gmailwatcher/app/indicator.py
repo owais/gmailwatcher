@@ -26,11 +26,11 @@ desktop_file = get_desktop_file()
 class Indicator:
     def __init__(self):
         self.launcher_entry = Unity.LauncherEntry.get_for_desktop_file(
-                desktop_file
-                )
+                desktop_file)
         #self.launcher_entry.connect('user-display', self.reset_indicators)
-        # FIXME: Find a signal emitted by Unity LauncherEntry when clicked
+        # FIXME: Find a signal emitted by Unity LauncherEntry when clicked?
         self.server = Indicate.Server()
+        self.server.set_dbus_object('org.owaislone.gmailwatcher')
         self.server.set_type("message.mail")
         self.server.set_desktop_file(desktop_file)
         self.server.connect("server-display", self.clicked_server)
@@ -66,6 +66,13 @@ class Indicator:
         self.launcher_entry.set_property('count', 0)
         self.launcher_entry.set_property('count-visible', False)
         self.launcher_entry.set_property("urgent", False)
+
+    def set_progress(self, fraction):
+        self.launcher_entry.set_property('progress', fraction)
+        self.launcher_entry.set_property('progress-visible', True)
+
+    def hide_progress(self):
+        self.launcher_entry.set_property('progress-visible', False)
 
     def clicked_server(self, widget, data=None):
         self.main_app.present()

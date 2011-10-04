@@ -1,0 +1,205 @@
+* {
+    padding:0px;
+    margin:0px;
+    font-family: Ubuntu;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    padding:0px;
+    margin:0px;
+    height: 100%;
+    background: #f3f2f1;
+    width:auto;
+    word-wrap:break-word;
+}
+
+#sidebar {
+    position:fixed;
+    width:180px;
+    background: #53514A;
+    min-height:100%;
+    height:auto;
+    display:inline;
+    z-index:10;
+}
+
+#main {
+    min-height:100%;
+    height:auto;
+    width:auto;
+    padding-left:180px;
+}
+
+select#accounts {
+    -webkit-appearance: button;
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.5, #53514A));
+    margin: 5px;
+    padding:10px 5px;
+    font-weight:bold;
+    width:90%;
+    border:solid thin  #333;
+    outline:none;
+    color:#f2f1f0;
+}
+
+.folders {
+    display:none;
+}
+
+.folder {
+    color: #f3f2f1;
+    text-align:right;
+    padding:10px;
+    padding-right:10px;
+    border-bottom: solid thin #333;
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to( #484741), color-stop(0.1,  #53514A));
+    text-transform: uppercase;
+    font-size:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.folder:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.6, #53514A));
+}
+
+.folder:active {
+    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.3, #53514A));
+}
+
+.folder:after {
+    content: '';
+    position:relative;
+    float:right;
+    right:-16px;
+    width:15px;
+    height:15px;
+}
+.folder.selected:after {
+    content: '';
+    background-image: url('img/arrow.png');
+    background-repeat:no-repeat;
+}
+
+.folder.unseen {
+    color: #FFCD27;
+    text-shadow: #ffcd27 0 0 15px;
+}
+
+.folder:last-child {
+    #box-shadow: #333 -1px 1px 1px;
+}
+
+ul.emails {
+    list-style:none;
+}
+
+.email {
+    display:none;
+}
+
+li.email {
+    float:left;
+    margin:10px;
+    display:block;
+    clear:both;
+    width:95%;
+}
+
+.email-body {
+    padding:5px 10px 10px 5px;
+    border: solid thin #999;
+    border-bottom:none;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f4f3f2), color-stop(0.8, #f9f8f7));
+    -webkit-box-shadow:#999 1px 1px 1px;
+    float:left;
+    display:block;
+    clear:both;
+    width:95%;
+}
+
+dl:first-child .email-body {
+    border-bottom:none;
+}
+
+dl:last-child .email-body {
+    border-bottom: solid thin #3c3b37;;
+}
+
+dt {
+    float:left;
+    width:100%;
+    cursor:pointer;
+}
+
+li.email dl:last-child .email-body {
+    -webkit-border-radius: 0 0 5px  5px;
+}
+
+.email div.meta {
+    float:left;
+    display:block;
+    clear:both;
+    width:100%;
+}
+
+.email span.from {
+    float:left;
+    width:100%;
+    font-size:11px;
+    padding:0 10px;
+}
+
+.email span.date {
+    float:right;
+    font-size:9px;
+    padding-right:20px;
+}
+
+.email span.subject {
+    color: #333;
+    float:left;
+    font-size:15px;
+    font-weight:bold;
+    display:block;
+    clear:both;
+    color:#333;
+    width:98%;
+    padding:5px;
+    margin-left:10px;
+}
+
+.email span.labels {
+    display:block; 
+    clear:both;
+    margin-left:10px;
+    float:left;
+}
+
+.email span.label {
+    color: #333;
+    float:left;
+    font-size:10px;
+    padding:1px 3px;
+    font-weight:bold;
+    background: #095E35;
+    color:#fff;
+    margin:3px;
+    -webkit-box-shadow: #000 0px 1px 3px;
+}
+
+.email span.label.system {
+    background: #D3340B;
+    color:#fff;
+}
+
+span.starred:before {
+    float:left;
+    padding-top:2px;
+    content: url("img/star.png");
+}
+

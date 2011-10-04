@@ -1,6 +1,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
 ### BEGIN LICENSE
 # Copyright (C) 2011 Owais Lone hello@owaislone.org
+# Adapted from Cris Kirkham (http://hmmtheresanidea.blogspot.com)
 # This program is free software: you can redistribute it and/or modify it
 # under the terms of the GNU General Public License version 3, as published
 # by the Free Software Foundation.
@@ -24,6 +25,8 @@ from email.header import decode_header
 from email.utils import parseaddr, parsedate, formatdate
 from email.parser import HeaderParser
 
+MONTHS = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul',
+          8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
 
 class Watcher(threading.Thread):
     stop_waiting_event = threading.Event()
@@ -38,10 +41,11 @@ class Watcher(threading.Thread):
         self.last_checks = last_checks
         self.last_checks_str = {}
         for folder, last_check in self.last_checks.items():
-            last_check_str = time.strftime(
-                    "%d-%b-%Y",
-                    time.localtime(last_check)
-                    )
+            lt = time.localtime(last_check)
+            last_check_str = "%d-%s-%d" % (
+                    lt.tm_mday,
+                    MONTHS[lt.tm_mon],
+                    lt.tm_year)
             self.last_checks_str[folder] = last_check_str
         threading.Thread.__init__(self)
 
@@ -53,14 +57,15 @@ class Watcher(threading.Thread):
         try:
             self.imap.login(self.username, self.password)
         except imaplib2.IMAP4_SSL.error:
-            self.report_error('Invalid Credentials')
+            GObject.idle_add(self.wrong_password_callback, self.username)
             return
         self.handle_new_mail()
         while not self.kill_now:
             self.wait_for_server()
 
-    def set_callback(self, callback):
-        self.callback = callback
+    def set_callbacks(self, cb_map):
+        for name, cb in cb_map.items():
+            setattr(self, name, cb)
 
     def get_mail_headers(self, id):
         """
@@ -125,7 +130,9 @@ class Watcher(threading.Thread):
                     '(SINCE %s UNSEEN)' % last_check
                     )
             new_mail = {}  # thread_id : message
-            for uid in data[0].split():
+            uid_list = data[0].split()
+            total = len(uid_list)
+            for iterr, uid in enumerate(uid_list):
                 if not uid in self.seen_mail:
                     self.seen_mail.append(uid)
                     mail_headers = self.get_mail_headers(uid)
@@ -133,9 +140,15 @@ class Watcher(threading.Thread):
                     mail_list = new_mail.get(thread_id, [])
                     mail_list.append(mail_headers)
                     new_mail[thread_id] = mail_list
+                GObject.idle_add(
+                            self.progress_callback,
+                            self.username,
+                            folder,
+                            float(iterr+1)/total
+                            )
             if new_mail:
                 GObject.idle_add(
-                        self.callback,
+                        self.mail_callback,
                         self.username,
                         folder,
                         new_mail

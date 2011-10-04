@@ -17,20 +17,25 @@
 
 import os
 import sys
-from gi.repository import Gio
+from gi.repository import Gio, Gtk
 
-# First check for instances, only then move forward.
+Gtk.init(sys.argv)
+
+
+# First check for running instances, only then move forward.
 def activate_application(application):
     try:
         mainapp.present()
     except NameError:
         pass
 
+
 g_app = Gio.Application.new('org.owaislone.gmailwatcher', 0)
 g_app.connect('activate', activate_application)
 g_app.run(sys.argv)
 if g_app.get_is_remote():
     #Quit if another instace is running.
+    sys.stdout.write('Already Running!')
     sys.exit()
 
 
@@ -50,6 +55,6 @@ from gmailwatcher.app.main_window import MainApp
 GObject.threads_init()
 
 loop = GObject.MainLoop()
-mainapp = MainApp(main_loop=loop)
+mainapp = MainApp(main_loop=loop, args=sys.argv)
 mainapp.run()
 

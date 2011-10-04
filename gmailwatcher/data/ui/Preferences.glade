@@ -210,6 +210,7 @@
                             </child>
                             <child>
                               <object class="GtkEntry" id="email_form">
+                                <property name="height_request">30</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">•</property>
@@ -226,6 +227,7 @@
                             </child>
                             <child>
                               <object class="GtkEntry" id="password_form">
+                                <property name="height_request">30</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="visibility">False</property>
@@ -245,6 +247,7 @@
                             </child>
                             <child>
                               <object class="GtkEntry" id="display_name_form">
+                                <property name="height_request">30</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="invisible_char">•</property>
@@ -286,34 +289,6 @@
                                 <property name="right_attach">3</property>
                                 <property name="top_attach">4</property>
                                 <property name="bottom_attach">5</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkImage" id="email_image">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="tooltip_text" translatable="yes">The email address is not correct. Please enter a valid gmail or google apps email address like 'xyz@example.com'.</property>
-                                <property name="stock">gtk-dialog-warning</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="y_options"></property>
-                              </packing>
-                            </child>
-                            <child>
-                              <object class="GtkImage" id="password_image">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="tooltip_text" translatable="yes">Please enter the password for your gmail account.</property>
-                                <property name="stock">gtk-dialog-warning</property>
-                              </object>
-                              <packing>
-                                <property name="left_attach">2</property>
-                                <property name="right_attach">3</property>
-                                <property name="top_attach">1</property>
-                                <property name="bottom_attach">2</property>
                                 <property name="y_options"></property>
                               </packing>
                             </child>
@@ -409,6 +384,12 @@
                                 <property name="y_options"></property>
                               </packing>
                             </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">True</property>
@@ -443,33 +424,73 @@
                 <property name="can_focus">False</property>
                 <property name="shadow_type">none</property>
                 <child>
-                  <object class="GtkBox" id="box1">
+                  <object class="GtkTable" id="table1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
+                    <property name="halign">start</property>
+                    <property name="margin_left">30</property>
+                    <property name="margin_top">30</property>
+                    <property name="n_rows">2</property>
+                    <property name="n_columns">2</property>
+                    <property name="column_spacing">20</property>
+                    <property name="row_spacing">20</property>
+                    <property name="homogeneous">True</property>
                     <child>
-                      <object class="GtkCheckButton" id="autostart">
-                        <property name="label" translatable="yes">Start Gmail Watcher automatically.</property>
+                      <object class="GtkLabel" id="autostart_label">
                         <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="xalign">0</property>
-                        <property name="draw_indicator">True</property>
-                        <signal name="toggled" handler="on_autostart_toggled" swapped="no"/>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Autostart </property>
                       </object>
                       <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="padding">20</property>
-                        <property name="position">0</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
                       </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                      <object class="GtkLabel" id="gtkstyle_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Gtk colors</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
                     </child>
                     <child>
-                      <placeholder/>
+                   <object class="GtkSwitch" id="autostart_switch">
+                          <property name="visible">True</property>
+                          <property name="can_focus">True</property>
+                          <property name="receives_default">True</property>
+                          <property name="use_action_appearance">False</property>
+                          <signal name="notify::active" handler="on_autostart_toggled" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                     <object class="GtkSwitch" id="gtkstyle_switch">
+                          <property name="visible">True</property>
+                          <property name="can_focus">True</property>
+                          <property name="receives_default">True</property>
+                          <property name="use_action_appearance">False</property>
+                          <signal name="notify::active" handler="on_gtk_colors_switch_toggled" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+
                     </child>
                   </object>
                 </child>
@@ -522,6 +543,12 @@
       <!-- column-name Folder -->
       <column type="gchararray"/>
     </columns>
+    <data>
+      <row>
+        <col id="0">True</col>
+        <col id="1" translatable="yes">INBOX</col>
+      </row>
+    </data>
   </object>
   <object class="GtkImage" id="image1">
     <property name="visible">True</property>

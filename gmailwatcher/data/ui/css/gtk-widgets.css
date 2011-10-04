@@ -1,0 +1,10 @@
+* {
+    -GtkProgressBar-min-horizontal-bar-height: 1;
+}
+
+GtkProgressBar {
+    border-radius: 8;
+    border-width: 0;
+    padding: 0;
+    -unico-outer-stroke-width: 0;
+}

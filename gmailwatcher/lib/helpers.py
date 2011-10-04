@@ -28,12 +28,12 @@ CONFIG_FILE = "gmailwatcher.conf"
 BUILDER_PATH = 'data/ui/'
 THEME_PATH = 'data/themes/'
 THEME_INDEX = 'main.html'
+AUTOSTART_FILE = 'data/autostart/gmailwatcher.desktop'
+DEFAULT_FOLDERS = [[True, 'INBOX'],]
 DEFAULT_LAST_CHECK = now() - 2714331  # Go one month back
 DEFAULT_preferences = {
     'accounts': {},
-    'preferences': {
-        'autostart': True,
-    }
+    'preferences': {}
 }
 
 
@@ -48,6 +48,8 @@ def get_builder(builder):
 def get_theme(theme):
     return os.path.join(get_base_path(), THEME_PATH, theme, THEME_INDEX)
 
+def get_autostart_file():
+    return os.path.join(get_base_path(), AUTOSTART_FILE)
 
 def get_desktop_file():
     base_path = get_base_path()
@@ -61,22 +63,36 @@ def get_desktop_file():
 
 
 def get_password(email):
-    return keyring.get_password('gmailwatcher', email) or ''
+    try:
+        return keyring.get_password('gmailwatcher', email) or ''
+    except:
+        return ''
 
 
 def set_password(email, password):
-    keyring.set_password('gmailwatcher', email, password)
+    try:
+        keyring.set_password('gmailwatcher', email, password)
+    except:
+        pass
+
+
+def setup_config_dir():
+    if not os.path.exists(os.path.join(USER_CONFIG_DIR, CONFIG_DIR)):
+        os.mkdir(os.path.join(USER_CONFIG_DIR, CONFIG_DIR))
 
 
 def save_preferences(preferences):
     '''
         Saves python dictionary as json.
     '''
+    setup_config_dir()
     _preferences = copy.deepcopy(preferences)
     for email, value in _preferences['accounts'].items():
         password = value.pop('password')
         set_password(email, password)
-    preferences_str = json.dumps(_preferences)
+        value['display_name'] = value['display_name'] or email
+        value['folders'] = value['folders'] or DEFAULT_FOLDERS
+    preferences_str = json.dumps(_preferences, indent=2)
     config_file = open(
         os.path.join(
             USER_CONFIG_DIR,
@@ -90,6 +106,7 @@ def save_preferences(preferences):
 
 
 def load_preferences():
+    setup_config_dir()
     try:
         config_file = open(
             os.path.join(
@@ -112,6 +129,7 @@ def load_preferences():
     for email, values in preferences['accounts'].items():
         password = get_password(email)
         values['password'] = password
+        values['folders'] = values.get('folders', DEFAULT_FOLDERS)
         last_checks = values.get('last_checks', {})
         for folder in values['folders']:
             last_checks[folder[1]] = last_checks.get(
@@ -126,7 +144,7 @@ def set_autostart(set):
     autostart_dir = os.path.join(USER_CONFIG_DIR, "autostart")
     if not os.path.exists(autostart_dir):
         os.mkdir(autostart_dir)
-    autostart_file = get_desktop_file()
+    autostart_file = get_autostart_file()
     if set:
         file = open(autostart_file)
         source = file.read()

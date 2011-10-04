@@ -28,9 +28,8 @@ from gmailwatcher.lib import consts
 
 gettext.textdomain('gmailwatcher')
 Notify.init('gmailwatcher')
-GObject.set_prgname('ggggname')
-GObject.set_application_name('Gmailwatcher')
-Gtk.init([])
+GObject.set_prgname('gmailwatcher')
+GObject.set_application_name('Gmail Watcher')
 
 
 class MainApp:
@@ -38,40 +37,58 @@ class MainApp:
     Main class that of the applications
     Handles all the callbacks and main window UI chrome
     """
-    def __init__(self, main_loop):
+    notified = []
+
+    def __init__(self, main_loop, args=[]):
         self.main_loop = main_loop
         self.builder = Gtk.Builder()
         self.builder.add_from_file(get_builder('MainApp.glade'))
         self.builder.connect_signals(self)
+
+        # Setup main widgets
         self.main_window = self.builder.get_object('mainwindow')
         self.about_dialog = self.builder.get_object('aboutdialog')
         self.about_dialog.connect('close', self.on_about_close)
+        self.toolbar = self.builder.get_object('toolbar')
+        self.accounts_list = self.builder.get_object('accounts_list')
+        self.accounts_combo = self.builder.get_object('accounts_combo')
+
+        # Setup custom progress bar style
+        self.progressbar = self.builder.get_object('progressbar')
+        css_provider = Gtk.CssProvider()
+        css_provider.load_from_path(get_builder('css/gtk-widgets.css'))
+        gtk_style = self.progressbar.get_style_context()
+        gtk_style.add_provider(css_provider,  4294967295)
+
+        # variables
+        self.prefs = new_preferences_dialog()
+        self.prefs.dialog.set_transient_for(self.main_window)
+        self.watchers = {}
+        self.progress_fractions = {}
+
+        # Indicators
+        self.indicator = new_application_indicator(self)
+
+        # Setup webkit
         self.webview = new_webview()
         self.webview.connect('document-load-finished', self.setup_webkit)
         self.webview_container = self.builder.get_object('webview_container')
         self.webview_container.add(self.webview)
         self.webview_container.show()
 
-        self.prefs = new_preferences_dialog()
-        self.prefs.dialog.set_transient_for(self.main_window)
-        self.watchers = {}
-
-        self.indicator = new_application_indicator(self)
-
+        if not '--quite-start' in args:
+            if not self.prefs.preferences['accounts']:
+                self.notify(
+                    consts.no_account[0],
+                    consts.no_account[1],
+                )
+                self.on_preferences_clicked(self.main_window)
+            else:
+                self.notify(
+                    consts.start[0],
+                    consts.start[1],
+                )
         self.finish_initialization()
-        if not self.prefs.preferences['accounts']:
-            self.notify(
-                consts.no_account[0],
-                consts.no_account[1],
-                consts.icon_name
-            )
-            self.on_settings_clicked(self.main_window)
-        else:
-            self.notify(
-                consts.start[0],
-                consts.start[1],
-                consts.icon_name
-            )
 
     # Initializers and deployers
     def finish_initialization(self):
@@ -80,9 +97,39 @@ class MainApp:
             create indicators for accounts
             setup threads for push notifications
         """
+        self.accounts_list.clear()
         for account, values in self.prefs.preferences['accounts'].items():
             self.indicator.add_indicator(account, values['display_name'])
+            self.progress_fractions[account] = 0.0
+            self.accounts_list.append([account])
         self.setup_watchers()
+
+    def setup_watchers(self):
+        """
+        Deploys threads for all accounts and adds GObject watch for them.
+        GObject watch restarts a thread every 2 minutes in case something goes
+        wrong like no internet connection
+        """
+        for account, values in self.prefs.preferences['accounts'].items():
+            if not account in self.watchers:
+                self.deploy_watcher(account, values)
+        # FIXME: Possible better way to handle this?
+        GObject.timeout_add_seconds(60 * 2, self.check_watchers)
+
+    def deploy_watcher(self, account, values):
+        """
+        starts a new thread for account
+        """
+        self.watchers[account] = w = gmail_watcher.new_watcher_thread(
+            account,
+            values
+        )
+        w.set_callbacks({
+            'mail_callback': self.new_mail,
+            'progress_callback': self.update_progress,
+            'wrong_password_callback': self.wrong_password
+            })
+        w.start()
 
     def update_state(self):
         """
@@ -97,30 +144,6 @@ class MainApp:
         self.finish_initialization()
         self.setup_webkit()
 
-    def deploy_watcher(self, account, values):
-        """
-        starts a new thread for account
-        """
-        self.watchers[account] = w = gmail_watcher.new_watcher_thread(
-            account,
-            values
-        )
-        w.set_callback(self.new_mail)
-        w.start()
-
-    def setup_watchers(self):
-        """
-        Deploys threads for all accounts and adds GObject watch for them.
-        GObject watch restarts a thread every 2 minutes in case something goes
-        wrong like no internet connection
-        """
-        for account, values in self.prefs.preferences['accounts'].items():
-            if not account in self.watchers:
-                self.deploy_watcher(account, values)
-
-        # FIXME: Possible better way to handle this?
-        GObject.timeout_add_seconds(60 * 2, self.check_watchers)
-
     def setup_webkit(self, *args, **kwargs):
         """
         Sets up webkit UI for accounts, folders
@@ -133,6 +156,23 @@ class MainApp:
                 if folder[0])
             self.webview.add_account(account, values['display_name'], folders)
 
+        if self.prefs.preferences.get('use_gtk_style', False):
+            gtk_colors = self.parse_gtk_colors()
+            self.webview.set_colors(gtk_colors)
+
+        _iter = self.accounts_list.get_iter_first()
+        self.accounts_combo.set_active_iter(_iter)
+
+    def parse_gtk_colors(self):
+        colors = {}
+        widget = Gtk.Window()
+        style = widget.get_style_context()
+        style.add_class('sidebar')
+        colors['bg'] = style.get_background_color(style.get_state()).to_string()
+        colors['border'] = style.get_border_color(style.get_state()).to_string()
+        colors['color'] = style.get_color(style.get_state()).to_string()
+        return colors
+
     def check_watchers(self):
         """
         Restarts a watcher thread in case it dies for some reason
@@ -143,6 +183,14 @@ class MainApp:
                 self.deploy_watcher(account, values)
         return True
 
+    def kill_watchers(self):
+        """
+        Kill all threads watching for new mail
+        """
+        for account, watcher in self.watchers.items():
+            self.watchers.pop(account)
+            watcher.kill()
+
     def update_last_checked_time(self, account, folder):
         """
         Updates last checked date of label.
@@ -150,7 +198,8 @@ class MainApp:
         """
         today = time.mktime(time.localtime())
         account_dict = self.prefs.preferences['accounts'][account]
-        if today > account_dict['last_checks'][folder]:
+        last_check = account_dict.get('last_checks',{}).get(folder,0.0)
+        if today > last_check:
             account_dict['last_checks'][folder] = today
             self.prefs.save_preferences()
 
@@ -162,11 +211,14 @@ class MainApp:
         notifications = []
         for thread_id, mail in new_mail.items():
             # Only show notif for last email in thread
-            notifications.append(
-                (self.prefs.preferences['accounts'][account]['display_name'],
-                "%s\n%s" % (mail[-1]['from'], mail[-1]['subject']),
-                "gmailwatcher")
-            )
+            msg_id = mail[-1]['msg_id']
+            if not msg_id in self.notified:
+                self.notified.append(msg_id)
+                notifications.append(
+                    (self.prefs.preferences['accounts'][account]['display_name'],
+                    "%s\n%s" % (mail[-1]['from'], mail[-1]['subject']),
+                    "gmailwatcher")
+                )
             self.update_last_checked_time(account, folder)
             self.webview.new_mail(account, folder, thread_id, mail)
 
@@ -177,18 +229,42 @@ class MainApp:
             self.notify(
                 self.prefs.preferences['accounts'][account]['display_name'],
                 consts.new_mail[1] % (len(notifications), folder),
-                'gmailwatcher'
             )
         else:
             for N in notifications:
-                self.notify(N[0], N[1], N[2])
+                self.notify(N[0], N[1])
+
+    def update_progress(self, account, label, fraction):
+        total_fraction = 0.0
+        for key, value in self.progress_fractions.items():
+            total_fraction += value
+        self.progress_fractions[account] = fraction
+        total_fraction /= len(self.progress_fractions)
+        if 0 < fraction < 1:
+            self.progressbar.show()
+            self.progressbar.set_fraction(total_fraction)
+            self.indicator.set_progress(total_fraction)
+        else:
+            self.progressbar.hide()
+            self.indicator.hide_progress()
+
+    def wrong_password(self, account):
+        self.notify(
+                consts.wrong_password[0],
+                consts.wrong_password[1] % account,
+                )
+        watcher = self.watchers.pop(account)
+        watcher.kill()
 
     # Gtk/UI related functions
     def run(self):
         self.main_loop.run()
 
-    def notify(self, *args):
-        Notify.Notification.new(*args).show()
+    def notify(self, title, message):
+        Notify.Notification.new(
+                title,
+                message,
+                consts.icon_name).show()
 
     def show_account(self, account):
         self.webview.show_account(account)
@@ -200,11 +276,24 @@ class MainApp:
         Otherwise show main app
         """
         if not self.prefs.preferences['accounts']:
-            self.on_settings_clicked(self.main_window)
+            self.on_preferences_clicked(self.main_window)
         if self.prefs.preferences['accounts']:
             self.main_window.present()
 
     #Gtk Event Callbacks
+    def on_pause_switched(self, widget, data=None):
+        active = widget.get_active()
+        if active:
+            self.setup_watchers()
+        else:
+            self.kill_watchers()
+
+    def on_account_changed(self, widget, data=None):
+        _iter = widget.get_active_iter()
+        if _iter:
+            account = self.accounts_list.get_value(_iter, 0)
+            self.webview.show_account(account)
+
     def on_window_focus(self, widget, data=None):
         self.indicator.reset_indicators()
 
@@ -215,7 +304,7 @@ class MainApp:
         self.about_dialog.run()
         self.about_dialog.hide()
 
-    def on_settings_clicked(self, widget, data=None):
+    def on_preferences_clicked(self, widget, data=None):
         self.prefs.dialog.run()
         self.prefs.dialog.hide()
         if self.prefs.accounts_updated:
@@ -226,6 +315,10 @@ class MainApp:
         self.main_window.hide()
         for watcher in self.watchers.values():
             watcher.kill()
+        self.notify(
+            consts.quit[0],
+            consts.quit[1],
+        )
         self.main_window.destroy()
 
     def on_mainwindow_delete_event(self, widget, data=None):
@@ -234,8 +327,3 @@ class MainApp:
 
     def on_mainwindow_destroy(self, widget, data=None):
         self.main_loop.quit()
-        self.notify(
-            consts.quit[0],
-            consts.quit[1],
-            consts.icon_name
-        )

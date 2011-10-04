@@ -59,6 +59,12 @@ Owais Lone (Theme) &lt;hello@owaislone.org&gt;</property>
       </object>
     </child>
   </object>
+  <object class="GtkListStore" id="accounts_list">
+    <columns>
+      <!-- column-name account -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
   <object class="GtkWindow" id="mainwindow">
     <property name="width_request">700</property>
     <property name="height_request">600</property>
@@ -78,22 +84,122 @@ Owais Lone (Theme) &lt;hello@owaislone.org&gt;</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkToolbar" id="toolbar">
+          <object class="GtkMenuBar" id="menubar1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="toolbar_style">both-horiz</property>
-            <style><class name="primary-toolbar"/></style>
             <child>
-              <object class="GtkToolButton" id="settings">
+              <object class="GtkMenuItem" id="menuitem1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_left">5</property>
                 <property name="use_action_appearance">False</property>
-                <property name="is_important">True</property>
-                <property name="label" translatable="yes">Preferences</property>
+                <property name="label" translatable="yes">_GmailWatcher</property>
                 <property name="use_underline">True</property>
-                <property name="stock_id">gtk-preferences</property>
-                <signal name="clicked" handler="on_settings_clicked" swapped="no"/>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem1">
+                        <property name="label">gtk-preferences</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_preferences_clicked" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="separatormenuitem1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem5">
+                        <property name="label">gtk-quit</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_quit_clicked" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="menuitem3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">_View</property>
+                <property name="use_underline">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="menuitem4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">_Help</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="imagemenuitem10">
+                        <property name="label">gtk-about</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="on_about_clicked" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkToolbar" id="toolbar">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="toolbar_style">icons</property>
+            <style><class name="primary-toolbar"/></style>
+            <child>
+              <object class="GtkToolItem" id="toolbutton2">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkComboBox" id="accounts_combo">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">accounts_list</property>
+                    <signal name="changed" handler="on_account_changed" swapped="no"/>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -106,7 +212,14 @@ Owais Lone (Theme) &lt;hello@owaislone.org&gt;</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
                 <child>
-                  <placeholder/>
+                  <object class="GtkProgressBar" id="progressbar">
+                    <property name="height_request">2</property>
+                    <property name="can_focus">False</property>
+                    <property name="no_show_all">True</property>
+                    <property name="valign">center</property>
+                    <property name="margin_left">30</property>
+                    <property name="margin_right">30</property>
+                  </object>
                 </child>
               </object>
               <packing>
@@ -115,15 +228,21 @@ Owais Lone (Theme) &lt;hello@owaislone.org&gt;</property>
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="About">
+              <object class="GtkToolItem" id="pauseitemlabel">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="use_action_appearance">False</property>
-                <property name="is_important">True</property>
-                <property name="label" translatable="yes">About</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-about</property>
-                <signal name="clicked" handler="on_about_clicked" swapped="no"/>
+                <property name="margin_left">5</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="tooltip_text" translatable="yes">Turn off the switch to stop looking for new mail.</property>
+                <child>
+                    <object class="GtkLabel" id="gtkstyle_label">
+                      <property name="visible">True</property>
+                      <property name="can_focus">False</property>
+                      <property name="label" translatable="yes">Notifications</property>
+                    </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -131,20 +250,43 @@ Owais Lone (Theme) &lt;hello@owaislone.org&gt;</property>
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="quit">
+              <object class="GtkToolItem" id="pauseitem">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_right">5</property>
+                <property name="can_focus">True</property>
                 <property name="use_action_appearance">False</property>
-                <property name="is_important">True</property>
-                <property name="label" translatable="yes">Quit</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-quit</property>
-                <signal name="clicked" handler="on_quit_clicked" swapped="no"/>
+                <property name="margin_left">5</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="tooltip_text" translatable="yes">Turn off the switch to stop looking for new mail.</property>
+                <child>
+                  <object class="GtkSwitch" id="pauseswitch">
+                      <property name="visible">True</property>
+                      <property name="can_focus">True</property>
+                      <property name="use_action_appearance">False</property>
+                      <property name="active">True</property>
+                    <signal name="notify::active" handler="on_pause_switched" swapped="no"/>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkToolButton" id="settings">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="label" translatable="yes">Preferences</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-preferences</property>
+                <property name="margin_left">5</property>
+                <signal name="clicked" handler="on_preferences_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">False</property>
               </packing>
             </child>
           </object>
@@ -157,11 +299,6 @@ Owais Lone (Theme) &lt;hello@owaislone.org&gt;</property>
         <child>
           <object class="GtkScrolledWindow" id="webview_container">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="has_focus">True</property>
-            <property name="is_focus">True</property>
-            <property name="can_default">True</property>
-            <property name="has_default">True</property>
             <child>
               <placeholder/>
             </child>

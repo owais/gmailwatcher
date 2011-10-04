@@ -24,6 +24,8 @@ from gmailwatcher.lib.helpers import (save_preferences,
                                       set_autostart,
                                       get_autostart)
 
+ENTRY_ICON_POS = Gtk.EntryIconPosition.SECONDARY
+
 
 class PreferencesDialog(Gtk.Dialog):
     def __init__(self):
@@ -35,13 +37,12 @@ class PreferencesDialog(Gtk.Dialog):
         #Get Widgets
         self.account_form = self.builder.get_object('AccountForm')
         self.accounts_treeview = self.builder.get_object('accounts_treeview')
-        self.autostart_button = self.builder.get_object('autostart')
+        self.autostart_switch = self.builder.get_object('autostart_switch')
+        self.gtkstyle_switch = self.builder.get_object('gtkstyle_switch')
 
         #Get Form Elements
         self.email_form = self.builder.get_object('email_form')
-        self.email_image = self.builder.get_object('email_image')
         self.password_form = self.builder.get_object('password_form')
-        self.password_image = self.builder.get_object('password_image')
         self.display_name_form = self.builder.get_object('display_name_form')
 
         #ListStores
@@ -58,19 +59,21 @@ class PreferencesDialog(Gtk.Dialog):
     def validate_email(self, widget=None, data=None):
         email = self.email_form.get_text()
         if re.match('.+@.+[.].+', email):
-            self.email_image.set_from_stock('', 1)
+            self.email_form.set_icon_from_stock(ENTRY_ICON_POS, Gtk.STOCK_OK)
             return True
         else:
-            self.email_image.set_from_stock(Gtk.STOCK_DIALOG_WARNING, 1)
+            self.email_form.set_icon_from_stock(ENTRY_ICON_POS,
+                    Gtk.STOCK_DIALOG_WARNING)
             return False
 
     def validate_password(self, widget=None, data=None):
         password = self.password_form.get_text()
         if password:
-            self.password_image.set_from_stock('', 1)
+            self.password_form.set_icon_from_stock(ENTRY_ICON_POS, None)
             return True
         else:
-            self.password_image.set_from_stock(Gtk.STOCK_DIALOG_WARNING, 1)
+            self.password_form.set_icon_from_stock(ENTRY_ICON_POS,
+                    Gtk.STOCK_DIALOG_WARNING)
             return False
 
     def validate_form(self):
@@ -82,8 +85,13 @@ class PreferencesDialog(Gtk.Dialog):
         try:
             M = imaplib2.IMAP4_SSL("imap.gmail.com")
             response = M.login(email, password)
+            self.password_form.set_icon_from_stock(ENTRY_ICON_POS,
+                    Gtk.STOCK_OK)
         except imaplib2.IMAP4_SSL.error:
-            print "Something went wrong"
+            self.password_form.set_icon_from_stock(ENTRY_ICON_POS,
+                    Gtk.STOCK_DIALOG_WARNING)
+            self.password_form.set_icon_tooltip_text(ENTRY_ICON_POS,
+                    'Wrong password')
             return
         if response[0] == 'OK':
             folders = M.list()
@@ -102,6 +110,7 @@ class PreferencesDialog(Gtk.Dialog):
         accounts[self.email_form.get_text()] = account
         self.preferences['accounts'] = accounts
         self.save_preferences()
+        self.load_preferences()
         self.accounts_updated = True
 
     def save_preferences(self):
@@ -112,9 +121,11 @@ class PreferencesDialog(Gtk.Dialog):
         self.account_store.clear()
         for account in self.preferences['accounts'].keys():
             self.account_store.append([account])
-        autostart = self.preferences['preferences']['autostart']
-        self.autostart_button.set_active(autostart)
-        set_autostart(autostart)
+        autostart = get_autostart()
+        self.autostart_switch.set_active(autostart)
+        self.gtkstyle_switch.set_active(
+                self.preferences.get('use_gtk_style', False)
+                )
 
     def reset_account_form(self):
         self.email_form.set_text('')
@@ -139,6 +150,7 @@ class PreferencesDialog(Gtk.Dialog):
             for folder in account['folders']:
                 self.folder_store.append([folder[0], folder[1]])
             self.account_form.show()
+        self.validate_form()
 
     def on_account_add(self, widget, data=None):
         self.reset_account_form()
@@ -170,10 +182,12 @@ class PreferencesDialog(Gtk.Dialog):
             self.reset_account_form()
             self.save_preferences()
 
-    def on_autostart_toggled(self, widget, data=None):
-        autostart = widget.get_active()
-        set_autostart(autostart)
-        self.preferences['preferences']['autostart'] = autostart
+    def on_autostart_toggled(self, widget, active):
+        set_autostart(widget.get_active())
+
+
+    def on_gtk_colors_switch_toggled(self, widget, active):
+        self.preferences['use_gtk_style'] = widget.get_active()
         self.save_preferences()
 
     def on_delete(self, widget, data=None):

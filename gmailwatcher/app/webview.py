@@ -20,7 +20,7 @@ from gi.repository import WebKit
 from gmailwatcher.lib.helpers import get_theme
 
 
-theme_file = get_theme('default')
+theme_file = get_theme('dark')
 
 
 class WebView(WebKit.WebView):
@@ -49,6 +49,11 @@ class WebView(WebKit.WebView):
 
     def show_account(self, account):
         js = 'show_account("%s");' % account
+        self.execute_script(js)
+
+    def set_colors(self, colors):
+        colors = json.dumps(colors)
+        js = 'theme.set_colors(%s);' % colors
         self.execute_script(js)
 
 

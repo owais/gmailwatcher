@@ -12,7 +12,7 @@ body {
     padding:0px;
     margin:0px;
     height: 100%;
-    background: #f3f2f1;
+    background: #fff;
     width:auto;
     word-wrap:break-word;
 }
@@ -20,7 +20,7 @@ body {
 #sidebar {
     position:fixed;
     width:180px;
-    background: #53514A;
+    background: #F3F3F3;
     min-height:100%;
     height:auto;
     display:inline;
@@ -35,15 +35,10 @@ body {
 }
 
 select#accounts {
-    -webkit-appearance: button;
-    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.5, #53514A));
     margin: 5px;
     padding:10px 5px;
-    font-weight:bold;
     width:90%;
-    border:solid thin  #333;
     outline:none;
-    color:#f2f1f0;
 }
 
 .folders {
@@ -51,24 +46,25 @@ select#accounts {
 }
 
 .folder {
-    color: #f3f2f1;
+    color: #333;
     text-align:right;
     padding:10px;
     padding-right:10px;
-    border-bottom: solid thin #333;
-    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to( #484741), color-stop(0.1,  #53514A));
+    border-bottom: solid thin #E1E1E1;
+    background: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#E1E1E1), color-stop(0.1, #F3F3F3));
     text-transform: uppercase;
     font-size:10px;
     font-weight:bold;
     cursor:pointer;
+    text-shadow: #999 0px 1px 2px;
 }
 
 .folder:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.6, #53514A));
+    background: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#E1E1E1), color-stop(0.4, #F3F3F3));
 }
 
 .folder:active {
-    background: -webkit-gradient(linear, left top, left bottom, from(#53514A), to(#484741), color-stop(0.3, #53514A));
+    background: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#E1E1E1), color-stop(0.6, #F3F3F3));
 }
 
 .folder:after {
@@ -86,12 +82,11 @@ select#accounts {
 }
 
 .folder.unseen {
-    color: #FFCD27;
-    text-shadow: #ffcd27 0 0 15px;
+    text-shadow: #94000D 0 0 10px;
 }
 
 .folder:last-child {
-    box-shadow: #333 -1px 1px 1px;
+    #box-shadow: #333 -1px 1px 1px;
 }
 
 ul.emails {

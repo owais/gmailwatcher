@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.tmpl.js"></script>
+    <script src="js/functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+
+<body>
+<div id="templates">
+    <script id="accountTabTmpl" type="text/x-jquery-tmpl"> 
+        <option class="account-tab" id="${account}">${display_name}</option>
+    </script>
+
+    <script id="foldersListTmpl" type="text/x-jquery-tmpl">
+        <ul class="folders" id="${account}"></ul>
+    </script>
+
+    <script id="folderTmpl" type="text/x-jquery-tmpl">
+        <li class="folder" id="${account}_${folder}">${folder}</li>
+    </script>
+
+    <script id="emailsListTmpl" type="text/x-jquery-tmpl">
+        <ul class="emails" id="${account}"></ul>
+    </script>
+
+    <script id="emailTmpl" type="text/x-jquery-tmpl">
+        <li class="email" id="${account}_${folder}" thread_id="${thread_id}">
+            {{each mail}}  
+            <dl>
+            <div class="email-body" id="${msg_id}">
+                <dt>
+                <div class="meta">
+                    <span class="from">${from}</span>
+                </div>
+                </dt>
+                <dd>
+                <span class="subject">${subject}</span>
+
+                <div class="meta">
+                <span class="labels">
+                    <span class="${starred}"></span>
+                    {{each system_labels}}
+                        <span class="label system">${$value}</span>
+                    {{/each}}
+                    {{each labels}}
+                        <span class="label">${$value}</span>
+                    {{/each}}
+                </span>
+                </div>
+
+                    <span class="date">${date}</span>
+                </dd>
+            </div>
+            </dl>
+            {{/each}}
+        </li>
+
+    </script>
+</div>
+
+    <div id="sidebar">
+        <div id="folders">
+        </div>
+        </select>
+    </div>
+
+    <div id="main">
+        <div id="content">
+        </div>
+    </div>
+</body>
+</html>

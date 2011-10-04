@@ -17,15 +17,20 @@ no_account = (
 
 quit = (
         _("ZZZzzzz..."),
-        _("If you need me again, you can find me by clicking"
+        _("If you need me again, you can find me by clicking "
           "he messaging icon in the top panel.")
         )
 
 start = (
         _("Now watching!"),
-        _("I'm now watching out for new mail and will stay hidden"
-          "until you need me. To summon me, click the messaging icon"
+        _("I'm now watching out for new mail and will stay hidden "
+          "until you need me. To summon me, click the messaging icon "
           "in the panel and then click me.")
         )
 
 new_mail = (_("New Mail"), _("%d new emails in %s"))
+
+wrong_password = (
+                _("Wrong credentials"),
+                _("Could not login to the account %s."
+                  " Please verify the username and password."))
