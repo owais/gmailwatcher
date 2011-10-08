@@ -3,7 +3,7 @@ Section: mail
 Priority: standard
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Owais Lone <hello@owaislone.org>
-Build-Depends: debhelper (>= 8.0.0), python (>=2.7), python-setuptools
+Build-Depends: debhelper (>= 8.0.0), python (>=2.7), python-setuptools, python-distutils-extra (>= 2.29)
 Standards-Version: 3.9.2
 XS-Python-Version: >= 2.7
 Homepage: http://launchpad.net/gmailwatcher
