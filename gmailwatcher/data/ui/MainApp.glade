@@ -32,7 +32,7 @@ You should have received a copy of the GNU General Public License along
 with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 </property>
     <property name="authors">Owais Lone &lt;hello@owaislone.org&gt;</property>
-    <property name="artists">Matthieu James (Logo) &lt;matthieu.james@gmail.com&gt; 
+    <property name="artists">Matthieu James (Icon) &lt;matthieu.james@gmail.com&gt; 
 Owais Lone (Theme) &lt;hello@owaislone.org&gt;</property>
     <property name="logo_icon_name">gmailwatcher</property>
     <property name="license_type">gpl-3-0</property>

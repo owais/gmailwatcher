@@ -3,13 +3,15 @@ Section: mail
 Priority: standard
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Owais Lone <hello@owaislone.org>
-Build-Depends: debhelper (>= 8.0.0)
+Build-Depends: debhelper (>= 8.0.0), python (>=2.7), python-setuptools
 Standards-Version: 3.9.2
-XS-Python-Version: current
+XS-Python-Version: >= 2.7
 Homepage: http://launchpad.net/gmailwatcher
+#Vcs-Git: git://git.debian.org/collab-maint/gmailwatcher.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/gmailwatcher.git;a=summary
 
 Package: gmailwatcher
-Architecture: all
+Architecture: any
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
  ${python:Depends},

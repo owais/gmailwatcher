@@ -12,7 +12,7 @@ body {
     padding:0px;
     margin:0px;
     height: 100%;
-    background: #fff;
+    background: #FFF;
     width:auto;
     word-wrap:break-word;
 }
@@ -20,7 +20,7 @@ body {
 #sidebar {
     position:fixed;
     width:180px;
-    background: #F3F3F3;
+    background: #E3E2E1;
     min-height:100%;
     height:auto;
     display:inline;
@@ -34,37 +34,29 @@ body {
     padding-left:180px;
 }
 
-select#accounts {
-    margin: 5px;
-    padding:10px 5px;
-    width:90%;
-    outline:none;
-}
-
 .folders {
     display:none;
 }
 
 .folder {
-    color: #333;
+    color: #000;
     text-align:right;
     padding:10px;
     padding-right:10px;
-    border-bottom: solid thin #E1E1E1;
-    background: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#E1E1E1), color-stop(0.1, #F3F3F3));
+    border-bottom: solid thin #E3E3E3;
+    background: -webkit-gradient(linear, left top, left bottom, from(#EAEAEA), to(#E3E2E1), color-stop(0.1, #EAEAEA));
     text-transform: uppercase;
     font-size:10px;
     font-weight:bold;
     cursor:pointer;
-    text-shadow: #999 0px 1px 2px;
 }
 
 .folder:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#E1E1E1), color-stop(0.4, #F3F3F3));
+    background: -webkit-gradient(linear, left top, left bottom, from(#EAEAEA), to(#E3E2E1), color-stop(0.4, #EAEAEA));
 }
 
 .folder:active {
-    background: -webkit-gradient(linear, left top, left bottom, from(#F3F3F3), to(#E1E1E1), color-stop(0.6, #F3F3F3));
+    background: -webkit-gradient(linear, left top, left bottom, from(#EAEAEA), to(#E3E2E1), color-stop(0.6, #EAEAEA));
 }
 
 .folder:after {
@@ -82,7 +74,8 @@ select#accounts {
 }
 
 .folder.unseen {
-    text-shadow: #94000D 0 0 10px;
+    color: #D73A43;
+    text-shadow: #ffcd27 0 0 5px;
 }
 
 .folder:last-child {

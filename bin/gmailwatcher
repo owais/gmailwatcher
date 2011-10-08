@@ -17,6 +17,7 @@
 
 import os
 import sys
+from glob import glob
 from gi.repository import Gio, Gtk
 
 Gtk.init(sys.argv)
@@ -41,13 +42,11 @@ if g_app.get_is_remote():
 
 # Start the application now
 # Setup project paths
-OPT_ROOT_PATH = '/opt/owaislone/'
 CURRENT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-if CURRENT_PATH.startswith('/usr'):
-    sys_path = OPT_ROOT_PATH
-else:
-    sys_path = CURRENT_PATH
-sys.path.insert(0, sys_path)
+if not CURRENT_PATH.startswith('/usr'):
+    sys.path.insert(0, CURRENT_PATH)
+
+sys.path.insert(0, '/opt/owaislone')
 
 from gi.repository import GObject
 from gmailwatcher.app.main_window import MainApp

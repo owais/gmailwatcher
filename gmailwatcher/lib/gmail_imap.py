@@ -49,6 +49,9 @@ class Watcher(threading.Thread):
             self.last_checks_str[folder] = last_check_str
         threading.Thread.__init__(self)
 
+    def select_all(self):
+        self.imap.select("[Gmail]/All Mail")
+
     def run(self):
         """
         Authenticate IMAP, check for unseen mail and then wait for new mail
@@ -67,6 +70,13 @@ class Watcher(threading.Thread):
         for name, cb in cb_map.items():
             setattr(self, name, cb)
 
+    def decode_string(self, string):
+        value, charset = decode_header(string)[0]
+        try:
+            return value.decode(charset or 'utf-8')
+        except:
+            return value
+
     def get_mail_headers(self, id):
         """
         Given mail ID, fetch headers along with gmail specific info
@@ -83,13 +93,10 @@ class Watcher(threading.Thread):
         header_data = parser.parsestr(header[0][1])
         _from = []
         for item in parseaddr(header_data['from']):
-            value, charset = decode_header(item)[0]
-            _from.append(value.decode(charset or 'ascii'))
+            _from.append(self.decode_string(item))
         results['from'] = "%s <%s>" % (_from[0], _from[1])
 
-        _subject = header_data['subject']
-        value, charset = decode_header(_subject)[0]
-        results['subject'] = value.decode(charset or 'ascii')
+        results['subject'] = self.decode_string(header_data['subject'])
         results['date'] = header_data['date']
         results['time'] = time.mktime(parsedate(results['date']))
         match = re.search(
@@ -153,7 +160,7 @@ class Watcher(threading.Thread):
                         folder,
                         new_mail
                         )
-        self.imap.select("[Gmail]/All Mail")
+        self.select_all()
 
     def kill(self):
         self.kill_now = True  # to stop while loop in run()
@@ -169,12 +176,12 @@ class Watcher(threading.Thread):
         """
         self.IDLEArgs = ''
         self.stop_waiting_event.clear()
-        self.imap.select("[Gmail]/All Mail")
 
         def _idle_callback(args):
             self.IDLEArgs = args
             self.stop_waiting_event.set()
 
+        self.select_all()
         self.imap.idle(
             timeout=60 * self.IDLE_TIMEOUT,
             callback=_idle_callback

@@ -42,6 +42,7 @@ class MainApp:
     def __init__(self, main_loop, args=[]):
         self.main_loop = main_loop
         self.builder = Gtk.Builder()
+        self.builder.set_translation_domain('gmailwatcher')
         self.builder.add_from_file(get_builder('MainApp.glade'))
         self.builder.connect_signals(self)
 

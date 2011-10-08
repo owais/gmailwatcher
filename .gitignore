@@ -4,5 +4,7 @@ debian/gmailwatcher/*
 debian/gmailwatcher
 debian/gmailwatcher.debhelper.log
 debian/gmailwatcher.substvars
+build/*
+build
 .bzr
 .bzrignore

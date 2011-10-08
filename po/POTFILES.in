@@ -1,0 +1,9 @@
+bin/gmailwatcher
+gmailwatcher/app/indicator.py
+gmailwatcher/app/webview.py
+gmailwatcher/app/main_window.py
+gmailwatcher/app/preferences.py
+gmailwatcher/lib/consts.py
+gmailwatcher/data/ui/MainApp.glade
+gmailwatcher/data/ui/Preferences.glade
+
