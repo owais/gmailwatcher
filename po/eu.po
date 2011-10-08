@@ -7,62 +7,170 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmailwatcher\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-09-12 03:33+0530\n"
+"POT-Creation-Date: 2011-10-08 06:08+0530\n"
 "PO-Revision-Date: 2011-09-11 22:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-09-12 05:23+0000\n"
-"X-Generator: Launchpad (build 13900)\n"
+"X-Launchpad-Export-Date: 2011-10-08 06:02+0000\n"
+"X-Generator: Launchpad (build 14110)\n"
 
-#: gmailwatcher/lib/consts.py:12
+#: ../gmailwatcher/lib/consts.py:12
 msgid "Add an account"
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:13
+#: ../gmailwatcher/lib/consts.py:13
 #, python-format
 msgid ""
 "Hey %s, I don't have any accounts to watch over right now.Please add a gmail "
 "or google apps account and I'll let youknow about any new emails."
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:19
+#: ../gmailwatcher/lib/consts.py:19
 msgid "ZZZzzzz..."
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:20
+#: ../gmailwatcher/lib/consts.py:20
 msgid ""
 "If you need me again, you can find me by clicking he messaging icon in the "
 "top panel."
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:25
+#: ../gmailwatcher/lib/consts.py:25
 msgid "Now watching!"
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:26
+#: ../gmailwatcher/lib/consts.py:26
 msgid ""
 "I'm now watching out for new mail and will stay hidden until you need me. To "
 "summon me, click the messaging icon in the panel and then click me."
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:31
+#: ../gmailwatcher/lib/consts.py:31
 msgid "New Mail"
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:31
+#: ../gmailwatcher/lib/consts.py:31
 #, python-format
 msgid "%d new emails in %s"
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:34
+#: ../gmailwatcher/lib/consts.py:34
 msgid "Wrong credentials"
 msgstr ""
 
-#: gmailwatcher/lib/consts.py:35
+#: ../gmailwatcher/lib/consts.py:35
 #, python-format
 msgid ""
 "Could not login to the account %s. Please verify the username and password."
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:1
+msgid "About GmailWatcher"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:2
+msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:3
+msgid "Gmail Watcher"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:4
+msgid "Gmail and Google apps mail notifier for Linux"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:5
+msgid "Homepage"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:6
+msgid "Notifications"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:7
+#: ../gmailwatcher/data/ui/Preferences.glade.h:12
+msgid "Preferences"
+msgstr "Hobespenak"
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:8
+msgid ""
+"This program is free software: you can redistribute it and/or modify it \n"
+"under the terms of the GNU General Public License version 3, as published \n"
+"by the Free Software Foundation.\n"
+"\n"
+"This program is distributed in the hope that it will be useful, but \n"
+"WITHOUT ANY WARRANTY; without even the implied warranties of \n"
+"MERCHANTABILITY, SATISFACTORY QUALITY, or FITNESS FOR A PARTICULAR \n"
+"PURPOSE.  See the GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License along \n"
+"with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:20
+msgid "Turn off the switch to stop looking for new mail."
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:21
+msgid "_GmailWatcher"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:22
+msgid "_Help"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/MainApp.glade.h:23
+msgid "_View"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:1
+msgid "Accounts"
+msgstr "Kontuak"
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:2
+msgid "Add..."
+msgstr ""
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:3
+msgid "Autostart "
+msgstr ""
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:4
+msgid "Check"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:5
+msgid "Display Name"
+msgstr "Bistaratzeko izena"
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:6
+msgid "Email"
+msgstr "Posta"
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:7
+msgid "Folder"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:8
+msgid "Folders"
+msgstr "Karpetak"
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:9
+msgid "Gtk colors"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:10
+msgid "INBOX"
+msgstr ""
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:11
+msgid "Password"
+msgstr "Pasahitza"
+
+#: ../gmailwatcher/data/ui/Preferences.glade.h:13
+msgid "Remove..."
 msgstr ""

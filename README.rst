@@ -41,7 +41,7 @@ To remove::
 Notes
 ------
 
-* ""[Gmail]/All Main" label must be present and visible via IMAP.
+* "[Gmail]/All Mail" label must be present and visible via IMAP.
   Check the labels tab in your gmail settings to confirm.
 
 * GmailWatcher will work on any linux distro as long as the required
