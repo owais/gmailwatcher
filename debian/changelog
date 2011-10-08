@@ -1,3 +1,17 @@
+gmailwatcher (11.10.3) oneiric; urgency=low
+
+  * Added README.rst
+  * Changed description in setup.py
+  * Changed the icons
+
+ -- Owais Lone <hello@owaislone.org>  Sat, 08 Oct 2011 14:06:04 +0530
+
+gmailwatcher (11.10.2) oneiric; urgency=low
+
+  * Fixed packaging bug
+
+ -- Owais Lone <hello@owaislone.org>  Sat, 08 Oct 2011 06:43:56 +0530
+
 gmailwatcher (11.10.1) oneiric; urgency=low
     * Added proper Python and Debian packaging
  -- Owais Lone <hello@owaislone.org>  Sat, 08 Oct 2011 06:04:00 +0530
