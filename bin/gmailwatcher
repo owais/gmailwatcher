@@ -17,7 +17,6 @@
 
 import os
 import sys
-from glob import glob
 from gi.repository import Gio, Gtk
 
 Gtk.init(sys.argv)
@@ -31,7 +30,7 @@ def activate_application(application):
         pass
 
 
-g_app = Gio.Application.new('org.owaislone.gmailwatcher', 0)
+g_app = Gio.Application.new('org.owaislone.gmailwatcher', Gio.ApplicationFlags.FLAGS_NONE)
 g_app.connect('activate', activate_application)
 g_app.run(sys.argv)
 if g_app.get_is_remote():
@@ -42,14 +41,15 @@ if g_app.get_is_remote():
 
 # Start the application now
 # Setup project paths
+sys.path.insert(0, '/opt/owaislone')
 CURRENT_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if not CURRENT_PATH.startswith('/usr'):
     sys.path.insert(0, CURRENT_PATH)
 
-sys.path.insert(0, '/opt/owaislone')
-
 from gi.repository import GObject
 from gmailwatcher.app.main_window import MainApp
+from gmailwatcher.lib import imap4_utf7
+
 
 GObject.threads_init()
 

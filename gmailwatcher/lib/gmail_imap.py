@@ -20,10 +20,13 @@ import threading
 import imaplib2
 import re
 import time
-from gi.repository import GObject
+import codecs
+
 from email.header import decode_header
 from email.utils import parseaddr, parsedate, formatdate
 from email.parser import HeaderParser
+
+from gi.repository import GObject
 
 MONTHS = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul',
           8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
@@ -33,6 +36,7 @@ class Watcher(threading.Thread):
     seen_mail = []
     kill_now = False
     IDLE_TIMEOUT = 29  # Mins
+    all_mail_folder = ''
 
     def __init__(self, username, password, folders, last_checks):
         self.username = username
@@ -49,9 +53,6 @@ class Watcher(threading.Thread):
             self.last_checks_str[folder] = last_check_str
         threading.Thread.__init__(self)
 
-    def select_all(self):
-        self.imap.select("[Gmail]/All Mail")
-
     def run(self):
         """
         Authenticate IMAP, check for unseen mail and then wait for new mail
@@ -63,8 +64,19 @@ class Watcher(threading.Thread):
             GObject.idle_add(self.wrong_password_callback, self.username)
             return
         self.handle_new_mail()
+        self.all_mail_folder = self.get_all_mail_folder()
         while not self.kill_now:
             self.wait_for_server()
+
+    def get_all_mail_folder(self):
+        self.imap.xatom('XLIST', '', '*')
+        R = self.imap.response('XLIST')[1]
+        all_mail = [box for box in R if "\\AllMail" in box][0]
+        return re.findall('"\[.*\].*"', all_mail)[0]
+
+    def select_all(self):
+        self.imap.select(self.all_mail_folder)
+
 
     def set_callbacks(self, cb_map):
         for name, cb in cb_map.items():
@@ -88,6 +100,8 @@ class Watcher(threading.Thread):
             "(BODY.PEEK[HEADER.FIELDS "
             "(subject from date)] X-GM-MSGID X-GM-LABELS X-GM-THRID)"
         )
+        if not header:
+            return {}
         results = {}
         parser = HeaderParser()
         header_data = parser.parsestr(header[0][1])
@@ -111,7 +125,7 @@ class Watcher(threading.Thread):
                                     for label
                                     in labels
                                     if label.startswith('\\\\')]
-        results['labels'] = [label
+        results['labels'] = [codecs.decode(label,'imap4-utf-7')
                              for label
                              in labels
                              if not label.startswith('\\\\')]
@@ -129,7 +143,7 @@ class Watcher(threading.Thread):
         send callbacks to main app with info about new mail.
         """
         for folder in self.folders:
-            self.imap.select(folder)
+            self.imap.select(codecs.encode(folder, 'imap4-utf-7'))
             last_check = self.last_checks_str[folder]
             typ, data = self.imap.uid(
                     'SEARCH',
@@ -143,6 +157,9 @@ class Watcher(threading.Thread):
                 if not uid in self.seen_mail:
                     self.seen_mail.append(uid)
                     mail_headers = self.get_mail_headers(uid)
+                    if not mail_headers:
+                        print 'Got empty header for uid %s' % uid
+                        continue
                     thread_id = mail_headers['thread_id']
                     mail_list = new_mail.get(thread_id, [])
                     mail_list.append(mail_headers)

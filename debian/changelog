@@ -1,3 +1,33 @@
+gmailwatcher (11.10.8) oneiric; urgency=low
+
+  * Fixed an issue with webkit js
+
+ -- Owais Lone <hello@owaislone.org>  Mon, 10 Oct 2011 23:58:40 +0530
+
+gmailwatcher (11.10.7) oneiric; urgency=low
+
+  * Closes: #871177
+
+ -- Owais Lone <hello@owaislone.org>  Sun, 09 Oct 2011 15:58:47 +0530
+
+gmailwatcher (11.10.6) oneiric; urgency=low
+
+  * Fixed a typo
+
+ -- Owais Lone <hello@owaislone.org>  Sun, 09 Oct 2011 03:46:07 +0530
+
+gmailwatcher (11.10.5) oneiric; urgency=low
+
+  * Closes: #869615:
+
+ -- Owais Lone <hello@owaislone.org>  Sun, 09 Oct 2011 03:42:13 +0530
+
+gmailwatcher (11.10.4) oneiric; urgency=low
+
+  * Fixed a packaging bug for indicator file not getting installed
+
+ -- Owais Lone <hello@owaislone.org>  Sat, 08 Oct 2011 21:46:07 +0530
+
 gmailwatcher (11.10.3) oneiric; urgency=low
 
   * Added README.rst

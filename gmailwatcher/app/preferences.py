@@ -15,6 +15,7 @@
 ### END LICENSE
 
 import re
+import codecs
 from gi.repository import Gtk
 
 from gmailwatcher.lib import imaplib2
@@ -27,7 +28,7 @@ from gmailwatcher.lib.helpers import (save_preferences,
 ENTRY_ICON_POS = Gtk.EntryIconPosition.SECONDARY
 
 
-class PreferencesDialog(Gtk.Dialog):
+class PreferencesDialog(object):
     def __init__(self):
         self.builder = Gtk.Builder()
         self.builder.add_from_file(get_builder('Preferences.glade'))
@@ -98,8 +99,9 @@ class PreferencesDialog(Gtk.Dialog):
             regex = re.compile(r'\(.*? ".*" "(?P<mailbox>.*)"')
             folder_list = [row[0] for row in self.folder_store]
             for folder in folders[1]:
-                if not 'noselect' in folder:
+                if not '\Noselect' in folder:
                     mailbox = regex.match(folder).groups()[0]
+                    mailbox = codecs.decode(mailbox, 'imap4-utf-7')
                     folder_list = [row[1] for row in self.folder_store]
                     if not mailbox in folder_list:
                         self.folder_store.append([False, mailbox])

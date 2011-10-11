@@ -10,27 +10,23 @@
 
 <body>
 <div id="templates">
-    <script id="accountTabTmpl" type="text/x-jquery-tmpl"> 
-        <option class="account-tab" id="${account}">${display_name}</option>
-    </script>
-
     <script id="foldersListTmpl" type="text/x-jquery-tmpl">
-        <ul class="folders" id="${account}"></ul>
+        <ul class="folders" account="${account}"></ul>
     </script>
 
     <script id="folderTmpl" type="text/x-jquery-tmpl">
-        <li class="folder" id="${account}_${folder}">${folder}</li>
+        <li class="folder" account="${account}" folder="${folder_id}">${folder}</li>
     </script>
 
     <script id="emailsListTmpl" type="text/x-jquery-tmpl">
-        <ul class="emails" id="${account}"></ul>
+        <ul class="emails" account="${account}"></ul>
     </script>
 
     <script id="emailTmpl" type="text/x-jquery-tmpl">
-        <li class="email" id="${account}_${folder}" thread_id="${thread_id}">
-            {{each mail}}  
+        <li class="email" account="${account}" folder="${folder_id}" thread_id="${thread_id}">
+            {{each mail}}
             <dl>
-            <div class="email-body" id="${msg_id}">
+            <div class="email-body" msg_id="${msg_id}">
                 <dt>
                 <div class="meta">
                     <span class="from">${from}</span>

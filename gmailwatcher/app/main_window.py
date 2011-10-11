@@ -25,14 +25,14 @@ from gmailwatcher.lib import gmail_imap as gmail_watcher
 from gmailwatcher.lib.helpers import get_builder
 from gmailwatcher.lib import consts
 
-
+gettext.bindtextdomain("gmailwatcher", "/usr/share/locale")
 gettext.textdomain('gmailwatcher')
 Notify.init('gmailwatcher')
 GObject.set_prgname('gmailwatcher')
 GObject.set_application_name('Gmail Watcher')
 
 
-class MainApp:
+class MainApp(object):
     """
     Main class that of the applications
     Handles all the callbacks and main window UI chrome
