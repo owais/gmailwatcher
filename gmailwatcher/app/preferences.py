@@ -16,7 +16,9 @@
 
 import re
 import codecs
-from gi.repository import Gtk
+import threading
+from gi.repository import Gtk, GObject
+from gettext import gettext as _
 
 from gmailwatcher.lib import imaplib2
 from gmailwatcher.lib.helpers import (save_preferences,
@@ -40,6 +42,9 @@ class PreferencesDialog(object):
         self.accounts_treeview = self.builder.get_object('accounts_treeview')
         self.autostart_switch = self.builder.get_object('autostart_switch')
         self.gtkstyle_switch = self.builder.get_object('gtkstyle_switch')
+        self.save_button = self.builder.get_object('save_button')
+        self.load_folders_button = self.builder.get_object('load_folders')
+        self.load_folders_label = self.load_folders_button.get_label()
 
         #Get Form Elements
         self.email_form = self.builder.get_object('email_form')
@@ -53,9 +58,14 @@ class PreferencesDialog(object):
         self.accounts_updated = False
         self.preferences = {}
         self.load_preferences()
+        self.threads = []
 
     def show(self):
         self.dialog.show()
+
+    def reset_load_folders_button(self, label=None):
+        self.load_folders_button.set_label(label or self.load_folders_label)
+        self.load_folders_button.set_sensitive(True)
 
     def validate_email(self, widget=None, data=None):
         email = self.email_form.get_text()
@@ -77,10 +87,19 @@ class PreferencesDialog(object):
                     Gtk.STOCK_DIALOG_WARNING)
             return False
 
-    def validate_form(self):
-        return self.validate_password() and self.validate_email()
+    def validate_folders(self, widget=None, data=None):
+        for i in self.folder_store:
+            if i[0]:
+                return True
+        return False
 
-    def get_mail_folders(self, widget, data=None):
+    def validate_form(self, widget=None, data=None):
+        valid = self.validate_password() and self.validate_email() and \
+               self.validate_folders()
+        self.save_button.set_sensitive(valid)
+        return valid
+
+    def get_mail_folders(self):
         email = self.email_form.get_text()
         password = self.password_form.get_text()
         try:
@@ -93,7 +112,9 @@ class PreferencesDialog(object):
                     Gtk.STOCK_DIALOG_WARNING)
             self.password_form.set_icon_tooltip_text(ENTRY_ICON_POS,
                     'Wrong password')
+            GObject.idle_add(self.reset_load_folders_button, _('Failed.. Try Again'))
             return
+        GObject.idle_add(self.reset_load_folders_button)
         if response[0] == 'OK':
             folders = M.list()
             regex = re.compile(r'\(.*? ".*" "(?P<mailbox>.*)"')
@@ -138,8 +159,17 @@ class PreferencesDialog(object):
     #Signals
     def on_folder_toggled(self, widget, index):
         self.folder_store[index][0] = not self.folder_store[index][0]
+        self.validate_form()
+
+    def on_load_folders_clicked(self, widget, data=None):
+        self.load_folders_button.set_label(_('Loading...'))
+        self.load_folders_button.set_sensitive(False)
+        get_folders_thread = threading.Thread(target=self.get_mail_folders)
+        get_folders_thread.setDaemon(True)
+        get_folders_thread.start()
 
     def on_account_selected(self, widget, data=None):
+        self.reset_load_folders_button()
         selection = widget.get_selection()
         model, iter = selection.get_selected()
         if iter:
@@ -149,12 +179,16 @@ class PreferencesDialog(object):
             self.password_form.set_text(account['password'])
             self.display_name_form.set_text(account['display_name'])
             self.folder_store.clear()
+            if account['folders']:
+                self.save_button.set_sensitive(True)
             for folder in account['folders']:
                 self.folder_store.append([folder[0], folder[1]])
             self.account_form.show()
         self.validate_form()
 
     def on_account_add(self, widget, data=None):
+        self.reset_load_folders_button()
+        self.save_button.set_sensitive(False)
         self.reset_account_form()
         self.account_form.show()
 
@@ -172,6 +206,7 @@ class PreferencesDialog(object):
             if not email in [row[0] for row in self.account_store]:
                 self.account_store.append([self.email_form.get_text()])
             self.account_form.hide()
+        self.save_button.set_sensitive(False)
 
     def on_account_delete(self, widget, data=None):
         selection = self.accounts_treeview.get_selection()

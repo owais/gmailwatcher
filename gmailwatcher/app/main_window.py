@@ -268,6 +268,10 @@ class MainApp(object):
                 consts.icon_name).show()
 
     def show_account(self, account):
+        for i in self.accounts_list:
+            if account == i[0]:
+                self.accounts_combo.set_active_iter(i.iter)
+                break
         self.webview.show_account(account)
         self.present()
 

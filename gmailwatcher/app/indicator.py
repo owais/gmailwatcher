@@ -27,12 +27,10 @@ class Indicator:
     def __init__(self):
         self.launcher_entry = Unity.LauncherEntry.get_for_desktop_file(
                 desktop_file)
-        #self.launcher_entry.connect('user-display', self.reset_indicators)
-        # FIXME: Find a signal emitted by Unity LauncherEntry when clicked?
-        self.server = Indicate.Server()
-        self.server.set_dbus_object('org.owaislone.gmailwatcher')
-        self.server.set_type("message.mail")
+        self.server = Indicate.Server.ref_default()
+        self.server.set_dbus_object('/org/owaislone/gmailwatcher')
         self.server.set_desktop_file(desktop_file)
+        self.server.set_type("message.mail")
         self.server.connect("server-display", self.clicked_server)
         self.server.show()
         self.indicators = {}

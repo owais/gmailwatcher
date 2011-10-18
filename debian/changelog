@@ -1,3 +1,10 @@
+gmailwatcher (11.10.9) oneiric; urgency=low
+
+  * Some changes to preferences UI
+  * Fixed libindicate warning
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 14 Oct 2011 21:33:56 +0530
+
 gmailwatcher (11.10.8) oneiric; urgency=low
 
   * Fixed an issue with webkit js
