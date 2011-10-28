@@ -18,8 +18,11 @@ import os
 import copy
 import json
 import keyring
+import gettext
 from time import time as now
 from gi.repository import GLib
+
+gettext.textdomain("gmailwatcher")
 
 
 USER_CONFIG_DIR = GLib.get_user_config_dir()

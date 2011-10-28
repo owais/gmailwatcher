@@ -14,7 +14,6 @@
 # with this program.  If not, see <http://www.gnu.org/licenses/>.
 ### END LICENSE
 
-import time
 import gettext
 from gi.repository import Gtk, GObject, Notify
 
@@ -25,8 +24,8 @@ from gmailwatcher.lib import gmail_imap as gmail_watcher
 from gmailwatcher.lib.helpers import get_builder
 from gmailwatcher.lib import consts
 
-gettext.bindtextdomain("gmailwatcher", "/usr/share/locale")
-gettext.textdomain('gmailwatcher')
+#gettext.bindtextdomain("gmailwatcher", "/usr/share/locale")
+#gettext.textdomain('gmailwatcher')
 Notify.init('gmailwatcher')
 GObject.set_prgname('gmailwatcher')
 GObject.set_application_name('Gmail Watcher')
@@ -37,12 +36,10 @@ class MainApp(object):
     Main class that of the applications
     Handles all the callbacks and main window UI chrome
     """
-    notified = []
 
     def __init__(self, main_loop, args=[]):
         self.main_loop = main_loop
         self.builder = Gtk.Builder()
-        self.builder.set_translation_domain('gmailwatcher')
         self.builder.add_from_file(get_builder('MainApp.glade'))
         self.builder.connect_signals(self)
 
@@ -192,17 +189,21 @@ class MainApp(object):
             self.watchers.pop(account)
             watcher.kill()
 
-    def update_last_checked_time(self, account, folder):
+    def update_last_checked_time(self, account, folder, timestamp):
         """
         Updates last checked date of label.
         Gmailwatcher doesn't notify about email older than last checked date
         """
-        today = time.mktime(time.localtime())
         account_dict = self.prefs.preferences['accounts'][account]
         last_check = account_dict.get('last_checks',{}).get(folder,0.0)
-        if today > last_check:
-            account_dict['last_checks'][folder] = today
+        if timestamp > last_check:
+            account_dict['last_checks'][folder] = timestamp
             self.prefs.save_preferences()
+
+    def is_new(self, account, folder, mail):
+        account_dict = self.prefs.preferences['accounts'][account]
+        last_check = account_dict.get('last_checks',{}).get(folder,0.0)
+        return mail['timestamp'] > last_check
 
     # Thread callbacks
     def new_mail(self, account, folder, new_mail):
@@ -210,30 +211,33 @@ class MainApp(object):
         Callback for registering new email from threads
         """
         notifications = []
+        timestamps = []
         for thread_id, mail in new_mail.items():
             # Only show notif for last email in thread
-            msg_id = mail[-1]['msg_id']
-            if not msg_id in self.notified:
-                self.notified.append(msg_id)
-                notifications.append(
-                    (self.prefs.preferences['accounts'][account]['display_name'],
-                    "%s\n%s" % (mail[-1]['from'], mail[-1]['subject']),
-                    "gmailwatcher")
-                )
-            self.update_last_checked_time(account, folder)
+            latest = max(mail, key=lambda M: M['timestamp'])
+            timestamps.append(latest['timestamp'])
+            if self.is_new(account, folder, latest):
+                notifications.append(latest)
+
             self.webview.new_mail(account, folder, thread_id, mail)
+        self.update_last_checked_time(account, folder, max(timestamps))
 
-        if not self.main_window.is_active():  # FIXME: Verify Behavior
-            self.indicator.new_mail(account, len(new_mail))
+        if notifications:
+            if not self.main_window.is_active():  # FIXME: Verify Behavior
+                self.indicator.new_mail(account, len(notifications))
 
-        if len(notifications) > 2:
-            self.notify(
-                self.prefs.preferences['accounts'][account]['display_name'],
-                consts.new_mail[1] % (len(notifications), folder),
-            )
-        else:
-            for N in notifications:
-                self.notify(N[0], N[1])
+            if len(notifications) > 2:
+                self.notify(
+                    self.prefs.preferences['accounts'][account]['display_name'],
+                    consts.new_mail[1] % (len(notifications), folder),
+                )
+            else:
+                for mail in notifications:
+                    notif_tuple = (
+                        self.prefs.preferences['accounts'][account]['display_name'],
+                        "%s\n%s" % (mail['from'], mail['subject']),
+                        "gmailwatcher")
+                    self.notify(notif_tuple[0], notif_tuple[1])
 
     def update_progress(self, account, label, fraction):
         total_fraction = 0.0

@@ -1,4 +1,4 @@
-# Slovak translation for gmailwatcher
+# Malay translation for gmailwatcher
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the gmailwatcher package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: gmailwatcher\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-11 00:14+0530\n"
-"PO-Revision-Date: 2011-09-11 22:20+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Slovak <sk@li.org>\n"
+"PO-Revision-Date: 2011-10-26 10:03+0000\n"
+"Last-Translator: abuyop <Unknown>\n"
+"Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-22 05:31+0000\n"
-"X-Generator: Launchpad (build 14170)\n"
+"X-Launchpad-Export-Date: 2011-10-27 05:46+0000\n"
+"X-Generator: Launchpad (build 14197)\n"
 
 #: ../gmailwatcher/lib/consts.py:12
 msgid "Add an account"
-msgstr ""
+msgstr "Tambah akaun"
 
 #: ../gmailwatcher/lib/consts.py:13
 #, python-format
@@ -27,74 +27,84 @@ msgid ""
 "Hey %s, I don't have any accounts to watch over right now.Please add a gmail "
 "or google apps account and I'll let youknow about any new emails."
 msgstr ""
+"Hei %s, Saya tidak mempunyai sebarang akaun untuk dipantau sekarang. Sila "
+"tambah akaun gmail atau google apps dan saya maklumkan anda sebarang "
+"kemasukan emel baru."
 
 #: ../gmailwatcher/lib/consts.py:19
 msgid "ZZZzzzz..."
-msgstr ""
+msgstr "ZZZzzzz..."
 
 #: ../gmailwatcher/lib/consts.py:20
 msgid ""
 "If you need me again, you can find me by clicking he messaging icon in the "
 "top panel."
 msgstr ""
+"Jika anda perlukan saya lagi, anda boleh cari saya dengan mengklik ikon "
+"pemesejan pada panel atas."
 
 #: ../gmailwatcher/lib/consts.py:25
 msgid "Now watching!"
-msgstr ""
+msgstr "Sekarang memantau!"
 
 #: ../gmailwatcher/lib/consts.py:26
 msgid ""
 "I'm now watching out for new mail and will stay hidden until you need me. To "
 "summon me, click the messaging icon in the panel and then click me."
 msgstr ""
+"Sekarang saya memantua mel baru dan dalam mod sembunyi sehinggalah anda "
+"perlukan saya. Untuk memanggil saya, klik ikon pemesejan pada panel dan klik "
+"saya."
 
 #: ../gmailwatcher/lib/consts.py:31
 msgid "New Mail"
-msgstr ""
+msgstr "Mel baru"
 
 #: ../gmailwatcher/lib/consts.py:31
 #, python-format
 msgid "%d new emails in %s"
-msgstr ""
+msgstr "%d mel baru didalam %s"
 
 #: ../gmailwatcher/lib/consts.py:34
 msgid "Wrong credentials"
-msgstr ""
+msgstr "Kendangan salah"
 
 #: ../gmailwatcher/lib/consts.py:35
 #, python-format
 msgid ""
 "Could not login to the account %s. Please verify the username and password."
 msgstr ""
+"Tidak dapat daftar masuk ke akaun %s. Sila sahkan nama pengguna dan kata "
+"laluan."
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:1
 msgid "About GmailWatcher"
-msgstr ""
+msgstr "Perihal GmailWatcher"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:2
 msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
-msgstr ""
+msgstr "Hakcipta © 2010-2011 Owais Lone hello@owaislone.org."
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:3
 msgid "Gmail Watcher"
-msgstr ""
+msgstr "Pemantau Gmail"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:4
 msgid "Gmail and Google apps mail notifier for Linux"
-msgstr ""
+msgstr "Pemaklum mel Gmail dan Google apps untuk Linux"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:5
 msgid "Homepage"
-msgstr ""
+msgstr "Laman Sesawang"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:6
 msgid "Notifications"
-msgstr ""
+msgstr "Pemberitahuan"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:7
 #: ../gmailwatcher/data/ui/Preferences.glade.h:12
 msgid "Preferences"
-msgstr "Nastavenia"
+msgstr "Keutamaan"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:8
 msgid ""
@@ -110,67 +120,79 @@ msgid ""
 "You should have received a copy of the GNU General Public License along \n"
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
+"Program ini adalah perisian bebas; anda boleh mengedarkannya dan/atau\n"
+"mengubahsuainya dibawah terma Pelesenan Awam Am GNU yang diterbitkan\n"
+"oleh Free Software Foundation; versi 3 sepertimana yang diterbitkan oleh\n"
+"Free Software Foundation\n"
+"\n"
+"Program ini diedarkan dengan harapan ianya akan berguna, tetapi\n"
+"TANPA SEBARANG JAMINAN; termasuk juga KESESUAIAN UNTUK \n"
+"DIPASARKAN, JAMINAN KUALITI, atau JAMINAN ATAS APA JUA SEBAB. \n"
+"Sila lihat GNU General Public License untuk maklumat lanjut.\n"
+"\n"
+"Anda seharusnya menerima satu salinan Lesen Awam Am GNU bersama-sama\n"
+"dengan program ini; jika tidak, lihat  <http://www.gnu.org/licenses/>.\n"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:20
 msgid "Turn off the switch to stop looking for new mail."
-msgstr ""
+msgstr "Matikan suis untuk henti mencari mel baru."
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:21
 msgid "_GmailWatcher"
-msgstr ""
+msgstr "_GmailWatcher"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:22
 msgid "_Help"
-msgstr ""
+msgstr "_Bantuan"
 
 #: ../gmailwatcher/data/ui/MainApp.glade.h:23
 msgid "_View"
-msgstr ""
+msgstr "_Lihat"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:1
 msgid "Accounts"
-msgstr "Účty"
+msgstr "Akaun"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:2
 msgid "Add..."
-msgstr ""
+msgstr "Tambah..."
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:3
 msgid "Autostart "
-msgstr ""
+msgstr "Mula-sendiri "
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:4
 msgid "Check"
-msgstr ""
+msgstr "Semak"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:5
 msgid "Display Name"
-msgstr "Zobraziť meno"
+msgstr "Paparkan Nama"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:6
 msgid "Email"
-msgstr "Email"
+msgstr "Emel"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:7
 msgid "Folder"
-msgstr ""
+msgstr "Folder"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:8
 msgid "Folders"
-msgstr "Priečinky"
+msgstr "Folder"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:9
 msgid "Gtk colors"
-msgstr ""
+msgstr "warna Gtk"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:10
 msgid "INBOX"
-msgstr ""
+msgstr "KOTAK MASUK"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:11
 msgid "Password"
-msgstr "Heslo"
+msgstr "Kata Laluan"
 
 #: ../gmailwatcher/data/ui/Preferences.glade.h:13
 msgid "Remove..."
-msgstr ""
+msgstr "Buang..."

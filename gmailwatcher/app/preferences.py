@@ -17,8 +17,9 @@
 import re
 import codecs
 import threading
-from gi.repository import Gtk, GObject
+import gettext
 from gettext import gettext as _
+from gi.repository import Gtk, GObject
 
 from gmailwatcher.lib import imaplib2
 from gmailwatcher.lib.helpers import (save_preferences,
@@ -27,6 +28,7 @@ from gmailwatcher.lib.helpers import (save_preferences,
                                       set_autostart,
                                       get_autostart)
 
+gettext.textdomain("gmailwatcher")
 ENTRY_ICON_POS = Gtk.EntryIconPosition.SECONDARY
 
 
@@ -70,7 +72,7 @@ class PreferencesDialog(object):
     def validate_email(self, widget=None, data=None):
         email = self.email_form.get_text()
         if re.match('.+@.+[.].+', email):
-            self.email_form.set_icon_from_stock(ENTRY_ICON_POS, Gtk.STOCK_OK)
+            self.email_form.set_icon_from_stock(ENTRY_ICON_POS, None)
             return True
         else:
             self.email_form.set_icon_from_stock(ENTRY_ICON_POS,
@@ -94,8 +96,8 @@ class PreferencesDialog(object):
         return False
 
     def validate_form(self, widget=None, data=None):
-        valid = self.validate_password() and self.validate_email() and \
-               self.validate_folders()
+        valid = False not in [self.validate_password(), self.validate_email(),
+                 self.validate_folders()]
         self.save_button.set_sensitive(valid)
         return valid
 
@@ -105,13 +107,7 @@ class PreferencesDialog(object):
         try:
             M = imaplib2.IMAP4_SSL("imap.gmail.com")
             response = M.login(email, password)
-            self.password_form.set_icon_from_stock(ENTRY_ICON_POS,
-                    Gtk.STOCK_OK)
         except imaplib2.IMAP4_SSL.error:
-            self.password_form.set_icon_from_stock(ENTRY_ICON_POS,
-                    Gtk.STOCK_DIALOG_WARNING)
-            self.password_form.set_icon_tooltip_text(ENTRY_ICON_POS,
-                    'Wrong password')
             GObject.idle_add(self.reset_load_folders_button, _('Failed.. Try Again'))
             return
         GObject.idle_add(self.reset_load_folders_button)
@@ -126,6 +122,7 @@ class PreferencesDialog(object):
                     folder_list = [row[1] for row in self.folder_store]
                     if not mailbox in folder_list:
                         self.folder_store.append([False, mailbox])
+        M.close()
         M.logout()
 
     def save_account(self, account):

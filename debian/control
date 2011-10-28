@@ -5,14 +5,13 @@ Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: Owais Lone <hello@owaislone.org>
 Build-Depends: debhelper (>= 8.0.0), python (>=2.7), python-setuptools, python-distutils-extra (>= 2.29)
 Standards-Version: 3.9.2
-XS-Python-Version: >= 2.7
+X-Python-Version: >= 2.7
 Homepage: http://launchpad.net/gmailwatcher
-#Vcs-Git: git://git.debian.org/collab-maint/gmailwatcher.git
-#Vcs-Browser: http://git.debian.org/?p=collab-maint/gmailwatcher.git;a=summary
+Vcs-Bzr: http://code.launchpad.net/~loneowais/gmailwatcher/master
+Vcs-Browser: http://bazaar.launchpad.net/~loneowais/gmailwatcher/master/files
 
 Package: gmailwatcher
 Architecture: all
-XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends},
  ${python:Depends},
  python-gobject,
@@ -24,5 +23,11 @@ Depends: ${misc:Depends},
  gir1.2-webkit-3.0,
  gir1.2-unity-4.0,
  python-keyring,
-Description: A gmail notifier with multiple accounts and instant notifications
- A gmail and google apps mail notifier with instant notifications, multiple accounts and summary view.
+Description: Gmail Desktop Notifier
+ A gmail and google apps mail notifier for Ubuntu's Unity desktop. Some of the feaures of gmailwatcher are:
+     * Instant Notifications: Notifies about new emails as soon as they arrive.
+     * Multiple Accounts: Use multiple account flawlessly.
+     * Google Mail for Domain: Supports Google Apps accounts too.
+     * Preview: You don't have to open gmail everytime to check what is there, gmailwatcher shows a nice preview of all emails in a conversation view style.
+     * Labels: Get notifications only for specified gmail labels.
+     * Extra Info: Gmailwatcher also shows additional mail info like Stars or Custom labels in preview.

@@ -1,3 +1,48 @@
+gmailwatcher (11.10.15.1) oneiric; urgency=low
+
+  * Fixed regression
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 28 Oct 2011 21:26:42 +0530
+
+gmailwatcher (11.10.15) oneiric; urgency=low
+
+  * Fixed a typo
+  * Updated debian packaging
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 28 Oct 2011 20:15:51 +0530
+
+gmailwatcher (11.10.14) oneiric; urgency=low
+
+  * Added support for loading translated strings
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 28 Oct 2011 19:36:28 +0530
+
+gmailwatcher (11.10.13) oneiric; urgency=low
+
+  * Changed form field icon symbols
+
+ -- Owais Lone <hello@owaislone.org>  Tue, 25 Oct 2011 21:50:49 +0530
+
+gmailwatcher (11.10.12) oneiric; urgency=high
+
+  * Fixed regressions introduced in last change
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 21 Oct 2011 23:10:24 +0530
+
+gmailwatcher (11.10.11) oneiric; urgency=critical
+
+  * fixed a typo in path settings that prevents app from starting
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 21 Oct 2011 20:53:51 +0530
+
+gmailwatcher (11.10.10) oneiric; urgency=low
+
+  * 1 notification per email:
+      + Users will be notified only once for each email even after reboots.
+        No more annoying multiple notifications of the same email after restart gmailwatcher or gnome session.
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 21 Oct 2011 20:44:50 +0530
+
 gmailwatcher (11.10.9) oneiric; urgency=low
 
   * Some changes to preferences UI

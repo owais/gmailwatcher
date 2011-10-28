@@ -1,8 +1,10 @@
 # Strings to be used in UI.
 
+import gettext
 from gettext import gettext as _
 from gi.repository import GLib
 
+gettext.textdomain("gmailwatcher")
 
 # String constants
 icon_name = 'gmailwatcher'

@@ -48,7 +48,6 @@ var new_email = function(mail) {
     if (!$('.folder[account='+account+'][folder='+mail.folder_id+']').hasClass('selected')) {
         email.hide();
         $('.folder[account='+account+'][folder='+mail.folder_id+']').addClass('unseen');
-        console.log($('.folder[account='+account+'][folder='+mail.folder_id+']'))
     }
 
     collapse_thread($('.email[thread_id='+thread_id+']'));

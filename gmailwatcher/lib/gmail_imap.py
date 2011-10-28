@@ -23,8 +23,8 @@ import time
 import codecs
 
 from email.header import decode_header
-from email.utils import parseaddr, parsedate, formatdate
-from email.parser import HeaderParser
+from email.utils import parsedate_tz, formatdate, mktime_tz, parseaddr
+from email import message_from_string
 
 from gi.repository import GObject
 
@@ -60,8 +60,10 @@ class Watcher(threading.Thread):
         self.imap = imaplib2.IMAP4_SSL("imap.gmail.com")
         try:
             self.imap.login(self.username, self.password)
-        except imaplib2.IMAP4_SSL.error:
-            GObject.idle_add(self.wrong_password_callback, self.username)
+        except imaplib2.IMAP4_SSL.error, message:
+            print 'ERROR:', message
+            if 'Invalid credentials' in message:
+                GObject.idle_add(self.wrong_password_callback, self.username)
             return
         self.handle_new_mail()
         self.all_mail_folder = self.get_all_mail_folder()
@@ -103,16 +105,19 @@ class Watcher(threading.Thread):
         if not header:
             return {}
         results = {}
-        parser = HeaderParser()
-        header_data = parser.parsestr(header[0][1])
+        #parser = HeaderParser()
+        #header_data = parser.parsestr(header[0][1])
+        header_data = message_from_string(header[0][1])
         _from = []
         for item in parseaddr(header_data['from']):
             _from.append(self.decode_string(item))
         results['from'] = "%s <%s>" % (_from[0], _from[1])
 
         results['subject'] = self.decode_string(header_data['subject'])
-        results['date'] = header_data['date']
-        results['time'] = time.mktime(parsedate(results['date']))
+        date = mktime_tz(parsedate_tz(header_data['date']))
+        results['date'] = formatdate(date)
+        results['timestamp'] = date
+
         match = re.search(
             'X-GM-THRID (?P<THRID>\d+) X-GM-MSGID (?P<MSGID>\d+) '
             'X-GM-LABELS \((?P<LABELS>.*)\) UID',
