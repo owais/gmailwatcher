@@ -114,112 +114,162 @@ gmailwatcher (11.10.2) oneiric; urgency=low
  -- Owais Lone <hello@owaislone.org>  Sat, 08 Oct 2011 06:43:56 +0530
 
 gmailwatcher (11.10.1) oneiric; urgency=low
+
     * Added proper Python and Debian packaging
+
  -- Owais Lone <hello@owaislone.org>  Sat, 08 Oct 2011 06:04:00 +0530
 
 gmailwatcher (11.09.14) oneiric; urgency=low
+
     * Some very minor UI changes
+
  -- Owais Lone <hello@owaislone.org>  Sun, 25 Sep 2011 19:27:20 +0530
 
 gmailwatcher (11.09.13) oneiric; urgency=low
+
     * Fixes #847402
+
  -- Owais Lone <hello@owaislone.org>  Mon, 12 Sep 2011 3:00:20 +0530
 
 gmailwatcher (11.09.12) oneiric; urgency=low
+
     * Added a pause switch
+
  -- Owais Lone <hello@owaislone.org>  Sun, 11 Sep 2011 15:04:20 +0530
 
 gmailwatcher (11.09.11) oneiric; urgency=low
+
     * Some fixes in webkit UI (JS).
+
  -- Owais Lone <hello@owaislone.org>  Sun, 11 Sep 2011 13:23:45 +0530
 
 gmailwatcher (11.08.26) oneiric; urgency=low
+
     * Temp fixes to saving/loading prefs [NEED TO REPLACE A LOT OF THIS CODE]
+
  -- Owais Lone <hello@owaislone.org>  Wed, 31 Aug 2011 22:13:5 +0530
 
 gmailwatcher (11.08.25) oneiric; urgency=low
+
     * Experimenting with account switching
+
  -- Owais Lone <hello@owaislone.org>  Mon, 29 Aug 2011 1:20:14 +0530
 
 gmailwatcher (11.08.24) oneiric; urgency=low
+
     * Started work on loading Gtk colors into webkit
     * Experimenting with account create form
+
  -- Owais Lone <hello@owaislone.org>  Sun, 21 Aug 2011 21:32:04 +0530
 
 gmailwatcher (11.08.23) oneiric; urgency=low
+
     * Added custom style to scrollbars [unico engine]
     * Created proper directory structure for app icons
+
  -- Owais Lone <hello@owaislone.org>  Sun, 21 Aug 2011 00:01:49 +0530
 
 gmailwatcher (11.08.22) oneiric; urgency=low
+
     * Fixed bug introduced in last commit
+
  -- Owais Lone <hello@owaislone.org>  Sat, 20 Aug 2011 18:22:01 +0530
 
 gmailwatcher (11.08.21) oneiric; urgency=low
+
     * No startup notifications on autostart
     * Notifies about wrong credentials
     * New in app and launcher progress bars to show mail download progress.
+
  -- Owais Lone <hello@owaislone.org>  Sat, 20 Aug 2011 16:33:45 +0530
 
 gmailwatcher (11.08.20) oneiric; urgency=low
+
     * Added scrollbars to show email download progress
     * Fixed bad strings
+
  -- Owais Lone <hello@owaislone.org>  Sat, 20 Aug 2011 02:38:03 +0530
 
 gmailwatcher (11.08.19) oneiric; urgency=low
+
     * Changed autostart checkbox to gtk switch
+
  -- Owais Lone <hello@owaislone.org>  Fri, 19 Aug 2011 15:23:11 +0530
 
 gmailwatcher (11.08.18) oneiric; urgency=low
+
     * Fixed a bug.
     * added temporary print statements 
+
  -- Owais Lone <hello@owaislone.org>  Tue, 16 Aug 2011 13:05:45 +0530
 
 gmailwatcher (11.08.17~1) oneiric; urgency=low
+
     * Bumped dependency version
+
  -- Owais Lone <hello@owaislone.org>  Sat, 13 Aug 2011 21:05:00 +0530
 
 gmailwatcher (11.08.16) oneiric; urgency=low
+
     * Improved PreferencesDialog
+
  -- Owais Lone <hello@owaislone.org>  Sat, 13 Aug 2011 13:01:34 +0530
 
 gmailwatcher (11.08.15) oneiric; urgency=low
+
     * Added some more doc strings
     * Changed gir deps 
+
  -- Owais Lone <hello@owaislone.org>  Sat, 13 Aug 2011 2:49:00 +0530
 
 gmailwatcher (11.08.14) oneiric; urgency=low
+
     * New Release
     * Fixed bug in preferences dialog
     * Now threads restart only when account changes
     * Added some doc strings
+
  -- Owais Lone <hello@owaislone.org>  Fri, 12 Aug 2011 16:03:09 +0530
 
 gmailwatcher (11.08.13) oneiric; urgency=low
+
     * Changed dependency value to let it install on oneiric
+
  -- Owais Lone <hello@owaislone.org>  Fri, 12 Aug 2011 2:15:09 +0530
 
 gmailwatcher (11.08.12) oneiric; urgency=low
+
     * Some theme changes
+
  -- Owais Lone <hello@owaislone.org>  Fri, 12 Aug 2011 00:15:09 +0530
 
 gmailwatcher (11.08.11) oneiric; urgency=low
+
     * Added some notifications.
+
  -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 20:14:45 +0530
 
 gmailwatcher (11.08.10) oneiric; urgency=low
+
     * Now time checks are saved per label
+
  -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 17:11:18 +0530
 
 gmailwatcher (11.08.9) oneiric; urgency=low
+
     * Faster startup especially when already running AKA bring up unique instance
+
  -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 12:15:11 +0530
 
 gmailwatcher (11.08.8) oneiric; urgency=low
+
     * Disabled test emails
+
  -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 11:28:11 +0530
 
 gmailwatcher (11.08.7) oneiric; urgency=low
+
     * Worked on the theme a bit
+
  -- Owais Lone <hello@owaislone.org>  Thu, 11 Aug 2011 11:22:11 +0530
 

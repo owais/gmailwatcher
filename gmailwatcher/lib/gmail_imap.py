@@ -28,8 +28,7 @@ from email import message_from_string
 
 from gi.repository import GObject
 
-MONTHS = {1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul',
-          8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec'}
+MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 class Watcher(threading.Thread):
     stop_waiting_event = threading.Event()
@@ -48,7 +47,7 @@ class Watcher(threading.Thread):
             lt = time.localtime(last_check)
             last_check_str = "%d-%s-%d" % (
                     lt.tm_mday,
-                    MONTHS[lt.tm_mon],
+                    MONTHS[lt.tm_mon-1],
                     lt.tm_year)
             self.last_checks_str[folder] = last_check_str
         threading.Thread.__init__(self)
