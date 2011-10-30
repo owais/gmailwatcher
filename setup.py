@@ -17,6 +17,7 @@ setup(
     version='11.10.18',
     author='Owais Lone',
     author_email='hello@owaislone.org',
+    description = "A desktop gmail notifier for Ubuntu OS",
     scripts=['bin/gmailwatcher'],
     packages=['gmailwatcher', 'gmailwatcher.lib', 'gmailwatcher.app'],
     package_data = {'gmailwatcher': data_files},

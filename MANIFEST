@@ -13,7 +13,6 @@ data/icons/48x48/apps/gmailwatcher.png
 data/icons/64x64/apps/gmailwatcher.png
 data/icons/scalable/apps/gmailwatcher.svg
 data/indicators/gmailwatcher
-data/shared/autostart/gmailwatcher.desktop
 data/shared/themes/dark/main.html
 data/shared/themes/dark/style.css
 data/shared/themes/dark/img/arrow-down.png
