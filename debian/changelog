@@ -1,3 +1,22 @@
+gmailwatcher (11.10.18) oneiric; urgency=low
+
+  * Changed packaging and autostart setting behaviour
+
+ -- Owais Lone <hello@owaislone.org>  Sun, 30 Oct 2011 20:11:38 +0530
+
+gmailwatcher (11.10.17) oneiric; urgency=low
+
+  * Shifted jquery to be an external dependency (libjs-jquery)
+
+ -- Owais Lone <hello@owaislone.org>  Sat, 29 Oct 2011 22:02:14 +0530
+
+gmailwatcher (11.10.16) oneiric; urgency=low
+
+  * Updated translation strings
+  * Bumped version number
+
+ -- Owais Lone <hello@owaislone.org>  Fri, 28 Oct 2011 22:00:31 +0530
+
 gmailwatcher (11.10.15.1) oneiric; urgency=low
 
   * Fixed regression

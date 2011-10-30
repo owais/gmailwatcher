@@ -21,11 +21,9 @@ Installation
 
 Install from repository and receive automatic updates::
 
-    sudo add-apt-repository ppa:loneowais/gmailwatcher
+    sudo add-apt-repository ppa:loneowais/gmailwatcher.dev
     sudo apt-get update
     sudo apt-get install gmailwatcher
-
-Use ``ppa:loneowais/gmailwatcher.dev`` for development builds.
 
 OR
 
@@ -44,6 +42,6 @@ Notes
 * "[Gmail]/All Mail" label must be present and visible via IMAP.
   Check the labels tab in your gmail settings to confirm.
 
-* GmailWatcher will work on any linux distro as long as the required
-  packages are installed. For example, it can work on OpenSUSE as Unity is
-  packaged for it.
+* To run directly from source:
+    
+    >>> bin/gmailwatcher

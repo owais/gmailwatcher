@@ -3,7 +3,7 @@ from distutils.core import setup
 
 from DistUtilsExtra.auto import *
 
-data_prefix = 'gmailwatcher/data/'
+data_prefix = '/data/shared'
 
 data_files = []
 for folder in os.walk(os.path.join(os.curdir, data_prefix)):
@@ -14,7 +14,7 @@ for folder in os.walk(os.path.join(os.curdir, data_prefix)):
 
 setup(
     name='gmailwatcher',
-    version='11.10.8',
+    version='11.10.18',
     author='Owais Lone',
     author_email='hello@owaislone.org',
     scripts=['bin/gmailwatcher'],
@@ -25,5 +25,15 @@ setup(
         'build': build_extra.build_extra,
         },
     license='GNU GPLv3',
-    long_description='A gmail and google apps mail notifier with instant notifications, multiple accounts and summary view.'
+    long_description='A gmail and google apps mail notifier with instant notifications, multiple accounts and summary view.',
+    classifiers=[
+        'Environment :: X11 Applications :: Gnome',
+        'Intended Audience :: End Users/Desktop',
+        'License :: OSI Approved :: GNU General Public License (GPL)',
+        'Operating System :: POSIX :: Linux',
+        'Topic :: Desktop Environment :: Gnome',
+        'Topic :: Communications :: Email',
+        'Programming Language :: Python',
+    ],
+
 )

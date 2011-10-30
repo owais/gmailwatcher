@@ -15,6 +15,7 @@
 ### END LICENSE
 
 import os
+import sys
 import copy
 import json
 import keyring
@@ -28,10 +29,10 @@ gettext.textdomain("gmailwatcher")
 USER_CONFIG_DIR = GLib.get_user_config_dir()
 CONFIG_DIR = "gmailwatcher"
 CONFIG_FILE = "gmailwatcher.conf"
-BUILDER_PATH = 'data/ui/'
-THEME_PATH = 'data/themes/'
+BUILDER_PATH = 'shared/ui/'
+THEME_PATH = 'shared/themes/'
 THEME_INDEX = 'main.html'
-AUTOSTART_FILE = 'data/autostart/gmailwatcher.desktop'
+AUTOSTART_FILE = 'shared/autostart/gmailwatcher.desktop'
 DEFAULT_FOLDERS = [[True, 'INBOX'],]
 DEFAULT_LAST_CHECK = now() - 2714331  # Go one month back
 DEFAULT_preferences = {
@@ -41,36 +42,34 @@ DEFAULT_preferences = {
 
 
 def get_base_path():
-    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+    current_path = os.path.abspath(__file__)
+    if current_path.startswith(sys.prefix):
+        return os.path.join(sys.prefix, 'share/gmailwatcher/')
+    else:
+        return os.path.abspath('data/')
 
 def get_builder(builder):
     return os.path.join(get_base_path(), BUILDER_PATH, builder)
 
-
 def get_theme(theme):
     return os.path.join(get_base_path(), THEME_PATH, theme, THEME_INDEX)
 
-def get_autostart_file():
-    return os.path.join(get_base_path(), AUTOSTART_FILE)
-
 def get_desktop_file():
     base_path = get_base_path()
-    if base_path.startswith('/opt/owaislone/'):
+    if base_path.startswith('/opt/') or base_path.startswith('/usr/'):
         return '/usr/share/applications/gmailwatcher.desktop'
     else:
+
         return os.path.join(
                 os.path.dirname(base_path),
                 'gmailwatcher.desktop'
                 )
-
 
 def get_password(email):
     try:
         return keyring.get_password('gmailwatcher', email) or ''
     except:
         return ''
-
 
 def set_password(email, password):
     try:
@@ -147,11 +146,15 @@ def set_autostart(set):
     autostart_dir = os.path.join(USER_CONFIG_DIR, "autostart")
     if not os.path.exists(autostart_dir):
         os.mkdir(autostart_dir)
-    autostart_file = get_autostart_file()
+    autostart_file = get_desktop_file()
     if set:
         file = open(autostart_file)
-        source = file.read()
+        source = file.readlines()
         file.close()
+        source = [line.strip() for line in source]
+        exec_index = source.index('Exec=gmailwatcher')
+        source[exec_index] ='Exec=gmailwatcher --quite-start'
+        source = '\n'.join(source)
         dest_file = os.path.join(autostart_dir, "gmailwatcher.desktop")
         dest = open(dest_file, 'w')
         dest.write(source)
@@ -167,6 +170,13 @@ def get_autostart():
             "gmailwatcher.desktop"
             )
     if os.path.exists(autostart_file):
+        lines = [line.strip() for line in open(autostart_file, 'r').readlines()]
+        for line in lines:
+            if line.startswith('X-GNOME-Autostart-enabled='):
+                if line.split('=')[1].strip() == 'true':
+                    return True
+                else:
+                    return False
         return True
     else:
         return False

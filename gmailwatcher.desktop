@@ -1,0 +1,9 @@
+[Desktop Entry]
+_Name=Gmail Watcher
+_Comment=A Gmail Notifier for Ubuntu
+Categories=GNOME;GTK;Network;Email;
+Exec=gmailwatcher
+Icon=gmailwatcher
+StartupNotify=true
+Terminal=false
+Type=Application

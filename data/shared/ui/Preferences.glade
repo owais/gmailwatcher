@@ -460,19 +460,6 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="gtkstyle_label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Gtk colors</property>
-                      </object>
-                      <packing>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-                    </child>
-                    <child>
                    <object class="GtkSwitch" id="autostart_switch">
                           <property name="visible">True</property>
                           <property name="can_focus">True</property>
@@ -486,24 +473,6 @@
                         <property name="x_options"></property>
                         <property name="y_options"></property>
                       </packing>
-                    </child>
-                    <child>
-                     <object class="GtkSwitch" id="gtkstyle_switch">
-                          <property name="visible">True</property>
-                          <property name="can_focus">True</property>
-                          <property name="receives_default">True</property>
-                          <property name="use_action_appearance">False</property>
-                          <signal name="notify::active" handler="on_gtk_colors_switch_toggled" swapped="no"/>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="right_attach">2</property>
-                        <property name="top_attach">1</property>
-                        <property name="bottom_attach">2</property>
-                        <property name="x_options"></property>
-                        <property name="y_options"></property>
-                      </packing>
-
                     </child>
                   </object>
                 </child>

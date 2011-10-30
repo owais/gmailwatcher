@@ -51,11 +51,6 @@ class WebView(WebKit.WebView):
         js = 'show_account("%s");' % account
         self.execute_script(js)
 
-    def set_colors(self, colors):
-        colors = json.dumps(colors)
-        js = 'theme.set_colors(%s);' % colors
-        self.execute_script(js)
-
 
 def new_webview():
     webview = WebView()

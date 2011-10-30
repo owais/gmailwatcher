@@ -13,8 +13,8 @@ icon_name = 'gmailwatcher'
 no_account = (
         _("Add an account"),
         _("Hey %s, I don't have any accounts to watch over right now."
-           "Please add a gmail or google apps account and I'll let you"
-           "know about any new emails.") % GLib.get_user_name()
+           "Please add a gmail or google apps account and I'll let you "
+           "know about any new messages.") % GLib.get_user_name()
         )
 
 quit = (
@@ -30,7 +30,7 @@ start = (
           "in the panel and then click me.")
         )
 
-new_mail = (_("New Mail"), _("%d new emails in %s"))
+new_mail = (_("New Mail"), _("%(count)d new messages in %(folder)s"))
 
 wrong_password = (
                 _("Wrong credentials"),

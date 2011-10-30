@@ -4,6 +4,6 @@ gmailwatcher/app/webview.py
 gmailwatcher/app/main_window.py
 gmailwatcher/app/preferences.py
 gmailwatcher/lib/consts.py
-gmailwatcher/data/ui/MainApp.glade
-gmailwatcher/data/ui/Preferences.glade
+data/shared/ui/MainApp.glade
+data/shared/ui/Preferences.glade
 

@@ -154,22 +154,8 @@ class MainApp(object):
                 if folder[0])
             self.webview.add_account(account, values['display_name'], folders)
 
-        if self.prefs.preferences.get('use_gtk_style', False):
-            gtk_colors = self.parse_gtk_colors()
-            self.webview.set_colors(gtk_colors)
-
         _iter = self.accounts_list.get_iter_first()
         self.accounts_combo.set_active_iter(_iter)
-
-    def parse_gtk_colors(self):
-        colors = {}
-        widget = Gtk.Window()
-        style = widget.get_style_context()
-        style.add_class('sidebar')
-        colors['bg'] = style.get_background_color(style.get_state()).to_string()
-        colors['border'] = style.get_border_color(style.get_state()).to_string()
-        colors['color'] = style.get_color(style.get_state()).to_string()
-        return colors
 
     def check_watchers(self):
         """
@@ -229,7 +215,7 @@ class MainApp(object):
             if len(notifications) > 2:
                 self.notify(
                     self.prefs.preferences['accounts'][account]['display_name'],
-                    consts.new_mail[1] % (len(notifications), folder),
+                    consts.new_mail[1] % {'count':len(notifications), 'folder':folder},
                 )
             else:
                 for mail in notifications:

@@ -43,7 +43,6 @@ class PreferencesDialog(object):
         self.account_form = self.builder.get_object('AccountForm')
         self.accounts_treeview = self.builder.get_object('accounts_treeview')
         self.autostart_switch = self.builder.get_object('autostart_switch')
-        self.gtkstyle_switch = self.builder.get_object('gtkstyle_switch')
         self.save_button = self.builder.get_object('save_button')
         self.load_folders_button = self.builder.get_object('load_folders')
         self.load_folders_label = self.load_folders_button.get_label()
@@ -122,7 +121,6 @@ class PreferencesDialog(object):
                     folder_list = [row[1] for row in self.folder_store]
                     if not mailbox in folder_list:
                         self.folder_store.append([False, mailbox])
-        M.close()
         M.logout()
 
     def save_account(self, account):
@@ -143,9 +141,6 @@ class PreferencesDialog(object):
             self.account_store.append([account])
         autostart = get_autostart()
         self.autostart_switch.set_active(autostart)
-        self.gtkstyle_switch.set_active(
-                self.preferences.get('use_gtk_style', False)
-                )
 
     def reset_account_form(self):
         self.email_form.set_text('')
@@ -219,10 +214,6 @@ class PreferencesDialog(object):
     def on_autostart_toggled(self, widget, active):
         set_autostart(widget.get_active())
 
-
-    def on_gtk_colors_switch_toggled(self, widget, active):
-        self.preferences['use_gtk_style'] = widget.get_active()
-        self.save_preferences()
 
     def on_delete(self, widget, data=None):
         self.dialog.hide()
