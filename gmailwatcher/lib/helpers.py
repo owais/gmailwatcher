@@ -35,31 +35,29 @@ THEME_INDEX = 'main.html'
 AUTOSTART_FILE = 'shared/autostart/gmailwatcher.desktop'
 DEFAULT_FOLDERS = [[True, 'INBOX'],]
 DEFAULT_LAST_CHECK = now() - 2714331  # Go one month back
-DEFAULT_preferences = {
+DEFAULT_PREFERENCES = {
     'accounts': {},
     'preferences': {}
 }
 
 
-def get_base_path():
-    current_path = os.path.abspath(__file__)
-    if current_path.startswith(sys.prefix):
-        return os.path.join(sys.prefix, 'share/gmailwatcher/')
-    else:
-        return os.path.abspath('data/')
+
+if os.path.abspath(__file__).startswith(sys.prefix):
+    BASE_PATH = os.path.join(sys.prefix, 'share/gmailwatcher/')
+else:
+    BASE_PATH = os.path.abspath('data/')
 
 def get_builder(builder):
-    return os.path.join(get_base_path(), BUILDER_PATH, builder)
+    return os.path.join(BASE_PATH, BUILDER_PATH, builder)
 
 def get_theme(theme):
-    return os.path.join(get_base_path(), THEME_PATH, theme, THEME_INDEX)
+    return os.path.join(BASE_PATH, THEME_PATH, theme, THEME_INDEX)
 
 def get_desktop_file():
-    base_path = get_base_path()
+    base_path = BASE_PATH
     if base_path.startswith('/opt/') or base_path.startswith('/usr/'):
         return '/usr/share/applications/gmailwatcher.desktop'
     else:
-
         return os.path.join(
                 os.path.dirname(base_path),
                 'gmailwatcher.desktop'
@@ -119,14 +117,14 @@ def load_preferences():
             'r'
         )
     except IOError:
-        return DEFAULT_preferences
+        return DEFAULT_PREFERENCES
 
     preferences_str = config_file.read()
     config_file.close()
     try:
         preferences = json.loads(preferences_str)
     except ValueError:
-        return DEFAULT_preferences
+        return DEFAULT_PREFERENCES
 
     for email, values in preferences['accounts'].items():
         password = get_password(email)
@@ -148,16 +146,11 @@ def set_autostart(set):
         os.mkdir(autostart_dir)
     autostart_file = get_desktop_file()
     if set:
-        file = open(autostart_file)
-        source = file.readlines()
-        file.close()
-        source = [line.strip() for line in source]
-        exec_index = source.index('Exec=gmailwatcher')
-        source[exec_index] ='Exec=gmailwatcher --quite-start'
-        source = '\n'.join(source)
+        contents = open(autostart_file).read()
+        contents.replace('Exec=gmailwatcher', 'Exec=gmailwatcher --quite-start')
         dest_file = os.path.join(autostart_dir, "gmailwatcher.desktop")
         dest = open(dest_file, 'w')
-        dest.write(source)
+        dest.write(contents)
         dest.close()
     else:
         os.system('rm ' + os.path.join(autostart_dir, "gmailwatcher.desktop"))
@@ -170,13 +163,7 @@ def get_autostart():
             "gmailwatcher.desktop"
             )
     if os.path.exists(autostart_file):
-        lines = [line.strip() for line in open(autostart_file, 'r').readlines()]
-        for line in lines:
-            if line.startswith('X-GNOME-Autostart-enabled='):
-                if line.split('=')[1].strip() == 'true':
-                    return True
-                else:
-                    return False
-        return True
+        contents =  open(autostart_file, 'r').read()
+        return 'X-GNOME-Autostart-enabled=false' not in contents
     else:
         return False
