@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-30 22:28+0530\n"
+"POT-Creation-Date: 2011-10-31 03:55+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,54 +25,57 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:14
+#: ../gmailwatcher/lib/consts.py:18
 msgid "Add an account"
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:15
+#: ../gmailwatcher/lib/consts.py:19
 #, python-format
 msgid ""
 "Hey %s, I don't have any accounts to watch over right now.Please add a gmail "
 "or google apps account and I'll let you know about any new messages."
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:21
+#: ../gmailwatcher/lib/consts.py:25
 msgid "ZZZzzzz..."
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:22
+#: ../gmailwatcher/lib/consts.py:26
 msgid ""
-"If you need me again, you can find me by clicking he messaging icon in the "
+"If you need me again, you can find me by clicking the messaging icon in the "
 "top panel."
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:27
-msgid "Now watching!"
+#: ../gmailwatcher/lib/consts.py:31 ../data/shared/ui/MainApp.glade.h:3
+msgid "Gmail Watcher"
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:28
+#: ../gmailwatcher/lib/consts.py:32
 msgid ""
-"I'm now watching out for new mail and will stay hidden until you need me. To "
-"summon me, click the messaging icon in the panel and then click me."
+"I'm now watching out for new mail and will stay hidden until you need me. "
+"You can find me by clicking the message icon above."
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:33
+#: ../gmailwatcher/lib/consts.py:36
 msgid "New Mail"
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:33
+#: ../gmailwatcher/lib/consts.py:36
 #, python-format
 msgid "%(count)d new messages in %(folder)s"
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:36
-msgid "Wrong credentials"
+#: ../gmailwatcher/lib/consts.py:39
+msgid "There is a problem!"
 msgstr ""
 
-#: ../gmailwatcher/lib/consts.py:37
+#: ../gmailwatcher/lib/consts.py:40
 #, python-format
 msgid ""
-"Could not login to the account %s. Please verify the username and password."
+"Could not access the account %s. Please confirm that,\n"
+"* The credentials are correct\n"
+"* IMAP is enabled in Gmail\n"
+"* 'All Mail' folder is visible to IMAP clients\n"
 msgstr ""
 
 #: ../data/shared/ui/MainApp.glade.h:1
@@ -81,10 +84,6 @@ msgstr ""
 
 #: ../data/shared/ui/MainApp.glade.h:2
 msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
-msgstr ""
-
-#: ../data/shared/ui/MainApp.glade.h:3
-msgid "Gmail Watcher"
 msgstr ""
 
 #: ../data/shared/ui/MainApp.glade.h:4

@@ -21,7 +21,6 @@ import imaplib2
 import re
 import time
 import codecs
-
 from email.header import decode_header
 from email.utils import parsedate_tz, formatdate, mktime_tz, parseaddr
 from email import message_from_string
@@ -61,8 +60,7 @@ class Watcher(threading.Thread):
             self.imap.login(self.username, self.password)
         except imaplib2.IMAP4_SSL.error, message:
             print 'ERROR:', message
-            if 'Invalid credentials' in message:
-                GObject.idle_add(self.wrong_password_callback, self.username)
+            GObject.idle_add(self.wrong_password_callback, self.username)
             return
         self.handle_new_mail()
         self.all_mail_folder = self.get_all_mail_folder()

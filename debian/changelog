@@ -1,3 +1,16 @@
+gmailwatcher (11.10.20) oneiric; urgency=low
+
+  * Closes (#883943)
+  * Changes in strings
+
+ -- Owais Lone <hello@owaislone.org>  Mon, 31 Oct 2011 03:53:26 +0530
+
+gmailwatcher (11.10.19) oneiric; urgency=low
+
+  * Some minor changes here and there
+
+ -- Owais Lone <hello@owaislone.org>  Sun, 30 Oct 2011 23:43:17 +0530
+
 gmailwatcher (11.10.18) oneiric; urgency=low
 
   * Changed packaging and autostart setting behaviour

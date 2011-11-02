@@ -7,54 +7,103 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gmailwatcher\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2011-10-28 18:29+0000\n"
+"POT-Creation-Date: 2011-10-31 03:55+0530\n"
 "PO-Revision-Date: 2011-09-11 22:20+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-29 05:39+0000\n"
+"X-Launchpad-Export-Date: 2011-10-31 05:45+0000\n"
 "X-Generator: Launchpad (build 14197)\n"
 
-#: gmailwatcher/app/preferences.py:110
+#: ../gmailwatcher/app/preferences.py:110
 msgid "Failed.. Try Again"
 msgstr ""
 
-#: gmailwatcher/app/preferences.py:157
+#: ../gmailwatcher/app/preferences.py:157
 msgid "Loading..."
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:1
-msgid "About GmailWatcher"
+#: ../gmailwatcher/lib/consts.py:18
+msgid "Add an account"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:2
-msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
+#: ../gmailwatcher/lib/consts.py:19
+#, python-format
+msgid ""
+"Hey %s, I don't have any accounts to watch over right now.Please add a gmail "
+"or google apps account and I'll let you know about any new messages."
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:3
+#: ../gmailwatcher/lib/consts.py:25
+msgid "ZZZzzzz..."
+msgstr ""
+
+#: ../gmailwatcher/lib/consts.py:26
+msgid ""
+"If you need me again, you can find me by clicking the messaging icon in the "
+"top panel."
+msgstr ""
+
+#: ../gmailwatcher/lib/consts.py:31 ../data/shared/ui/MainApp.glade.h:3
 msgid "Gmail Watcher"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:4
+#: ../gmailwatcher/lib/consts.py:32
+msgid ""
+"I'm now watching out for new mail and will stay hidden until you need me. "
+"You can find me by clicking the message icon above."
+msgstr ""
+
+#: ../gmailwatcher/lib/consts.py:36
+msgid "New Mail"
+msgstr ""
+
+#: ../gmailwatcher/lib/consts.py:36
+#, python-format
+msgid "%(count)d new messages in %(folder)s"
+msgstr ""
+
+#: ../gmailwatcher/lib/consts.py:39
+msgid "There is a problem!"
+msgstr ""
+
+#: ../gmailwatcher/lib/consts.py:40
+#, python-format
+msgid ""
+"Could not access the account %s. Please confirm that,\n"
+"* The credentials are correct\n"
+"* IMAP is enabled in Gmail\n"
+"* 'All Mail' folder is visible to IMAP clients\n"
+msgstr ""
+
+#: ../data/shared/ui/MainApp.glade.h:1
+msgid "About GmailWatcher"
+msgstr ""
+
+#: ../data/shared/ui/MainApp.glade.h:2
+msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
+msgstr ""
+
+#: ../data/shared/ui/MainApp.glade.h:4
 msgid "Gmail and Google apps mail notifier for Linux"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:5
+#: ../data/shared/ui/MainApp.glade.h:5
 msgid "Homepage"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:6
+#: ../data/shared/ui/MainApp.glade.h:6
 msgid "Notifications"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:7
-#: gmailwatcher/data/ui/Preferences.glade.h:12
+#: ../data/shared/ui/MainApp.glade.h:7
+#: ../data/shared/ui/Preferences.glade.h:12
 msgid "Preferences"
 msgstr "Параметры"
 
-#: gmailwatcher/data/ui/MainApp.glade.h:8
+#: ../data/shared/ui/MainApp.glade.h:8
 msgid ""
 "This program is free software: you can redistribute it and/or modify it \n"
 "under the terms of the GNU General Public License version 3, as published \n"
@@ -69,113 +118,66 @@ msgid ""
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:20
+#: ../data/shared/ui/MainApp.glade.h:20
 msgid "Turn off the switch to stop looking for new mail."
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:21
+#: ../data/shared/ui/MainApp.glade.h:21
 msgid "_GmailWatcher"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:22
+#: ../data/shared/ui/MainApp.glade.h:22
 msgid "_Help"
 msgstr ""
 
-#: gmailwatcher/data/ui/MainApp.glade.h:23
+#: ../data/shared/ui/MainApp.glade.h:23
 msgid "_View"
 msgstr ""
 
-#: gmailwatcher/data/ui/Preferences.glade.h:1
+#: ../data/shared/ui/Preferences.glade.h:1
 msgid "Accounts"
 msgstr "Учётные записи"
 
-#: gmailwatcher/data/ui/Preferences.glade.h:2
+#: ../data/shared/ui/Preferences.glade.h:2
 msgid "Add..."
 msgstr ""
 
-#: gmailwatcher/data/ui/Preferences.glade.h:3
+#: ../data/shared/ui/Preferences.glade.h:3
 msgid "Autostart "
 msgstr ""
 
-#: gmailwatcher/data/ui/Preferences.glade.h:4
+#: ../data/shared/ui/Preferences.glade.h:4
 msgid "Check"
 msgstr ""
 
-#: gmailwatcher/data/ui/Preferences.glade.h:5
+#: ../data/shared/ui/Preferences.glade.h:5
 msgid "Display Name"
 msgstr "Отображаемое имя"
 
-#: gmailwatcher/data/ui/Preferences.glade.h:6
+#: ../data/shared/ui/Preferences.glade.h:6
 msgid "Email"
 msgstr "Электронная почта"
 
-#: gmailwatcher/data/ui/Preferences.glade.h:7
+#: ../data/shared/ui/Preferences.glade.h:7
 msgid "Folder"
 msgstr ""
 
-#: gmailwatcher/data/ui/Preferences.glade.h:8
+#: ../data/shared/ui/Preferences.glade.h:8
 msgid "Folders"
 msgstr "Каталоги"
 
-#: gmailwatcher/data/ui/Preferences.glade.h:9
+#: ../data/shared/ui/Preferences.glade.h:9
 msgid "INBOX"
 msgstr ""
 
-#: gmailwatcher/data/ui/Preferences.glade.h:10
+#: ../data/shared/ui/Preferences.glade.h:10
 msgid "Load Gmail Folders"
 msgstr ""
 
-#: gmailwatcher/data/ui/Preferences.glade.h:11
+#: ../data/shared/ui/Preferences.glade.h:11
 msgid "Password"
 msgstr "Пароль"
 
-#: gmailwatcher/data/ui/Preferences.glade.h:13
+#: ../data/shared/ui/Preferences.glade.h:13
 msgid "Remove..."
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:14
-msgid "Add an account"
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:15
-msgid ""
-"Hey %s, I don't have any accounts to watch over right now.Please add a gmail "
-"or google apps account and I'll let you know about any new messages."
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:21
-msgid "ZZZzzzz..."
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:22
-msgid ""
-"If you need me again, you can find me by clicking he messaging icon in the "
-"top panel."
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:27
-msgid "Now watching!"
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:28
-msgid ""
-"I'm now watching out for new mail and will stay hidden until you need me. To "
-"summon me, click the messaging icon in the panel and then click me."
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:33
-msgid "%(count)d new messages in %(folder)s"
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:33
-msgid "New Mail"
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:36
-msgid "Wrong credentials"
-msgstr ""
-
-#: gmailwatcher/lib/consts.py:37
-msgid ""
-"Could not login to the account %s. Please verify the username and password."
 msgstr ""

@@ -14,7 +14,7 @@ for folder in os.walk(os.path.join(os.curdir, data_prefix)):
 
 setup(
     name='gmailwatcher',
-    version='11.10.18',
+    version='11.10.19',
     author='Owais Lone',
     author_email='hello@owaislone.org',
     description = "A desktop gmail notifier for Ubuntu OS",
