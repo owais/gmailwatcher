@@ -5,5 +5,6 @@ debian/gmailwatcher.debhelper.log
 debian/gmailwatcher.substvars
 build/*
 build
+.ropeproject
 .bzr
 .bzrignore

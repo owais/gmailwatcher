@@ -25,7 +25,7 @@ from gmailwatcher.lib.helpers import get_builder
 from gmailwatcher.lib import consts
 
 #gettext.bindtextdomain("gmailwatcher", "/usr/share/locale")
-#gettext.textdomain('gmailwatcher')
+gettext.textdomain('gmailwatcher')
 Notify.init('gmailwatcher')
 GObject.set_prgname('gmailwatcher')
 GObject.set_application_name('Gmail Watcher')
@@ -37,7 +37,7 @@ class MainApp(object):
     Handles all the callbacks and main window UI chrome
     """
 
-    def __init__(self, main_loop, args=[]):
+    def __init__(self, main_loop, application, args=[]):
         self.main_loop = main_loop
         self.builder = Gtk.Builder()
         self.builder.add_from_file(get_builder('MainApp.glade'))
@@ -86,6 +86,8 @@ class MainApp(object):
                     consts.start[0],
                     consts.start[1],
                 )
+
+        self.main_window.set_application(application)
         self.finish_initialization()
 
     # Initializers and deployers
@@ -225,6 +227,9 @@ class MainApp(object):
                         "gmailwatcher")
                     self.notify(notif_tuple[0], notif_tuple[1])
 
+    def play_sound(self):
+        pass
+
     def update_progress(self, account, label, fraction):
         total_fraction = 0.0
         for key, value in self.progress_fractions.items():
@@ -270,6 +275,7 @@ class MainApp(object):
         Show preferences dialog if no accounts added.
         Otherwise show main app
         """
+        self.indicator.reset_indicators()
         if not self.prefs.preferences['accounts']:
             self.on_preferences_clicked(self.main_window)
         if self.prefs.preferences['accounts']:

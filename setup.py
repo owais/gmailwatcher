@@ -14,14 +14,15 @@ for folder in os.walk(os.path.join(os.curdir, data_prefix)):
 
 setup(
     name='gmailwatcher',
-    version='11.10.19',
+    version='11.10.21',
     author='Owais Lone',
     author_email='hello@owaislone.org',
     description = "A desktop gmail notifier for Ubuntu OS",
     scripts=['bin/gmailwatcher'],
     packages=['gmailwatcher', 'gmailwatcher.lib', 'gmailwatcher.app'],
     package_data = {'gmailwatcher': data_files},
-    data_files = [('share/indicators/messages/applications/', ['data/indicators/gmailwatcher'])],
+    data_files = [('share/indicators/messages/applications/', ['data/indicators/gmailwatcher']),
+                  ('share/menu/', ['data/menu/gmailwatcher'])],
     cmdclass={
         'build': build_extra.build_extra,
         },

@@ -1,3 +1,9 @@
+gmailwatcher (11.10.21) oneiric; urgency=low
+
+  * Fixed a bug which prevented indicators from resetting state
+
+ -- Owais Lone <hello@owaislone.org>  Thu, 03 Nov 2011 01:45:14 +0530
+
 gmailwatcher (11.10.20) oneiric; urgency=low
 
   * Closes (#883943)

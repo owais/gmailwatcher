@@ -1,0 +1,6 @@
+?package(gmailwatcher):\
+    needs="x11"\
+    section="Applications/Network/Communication"\
+    title="Gmail Watcher"\
+    icon="/usr/share/pixmaps/gmailwatcher.png"\
+    command="/usr/bin/gmailwatcher"

@@ -147,7 +147,7 @@ def set_autostart(set):
     autostart_file = get_desktop_file()
     if set:
         contents = open(autostart_file).read()
-        contents.replace('Exec=gmailwatcher', 'Exec=gmailwatcher --quite-start')
+        contents = contents.replace('Exec=gmailwatcher', 'Exec=gmailwatcher --quite-start')
         dest_file = os.path.join(autostart_dir, "gmailwatcher.desktop")
         dest = open(dest_file, 'w')
         dest.write(contents)
