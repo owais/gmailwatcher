@@ -22,7 +22,8 @@ setup(
     packages=['gmailwatcher', 'gmailwatcher.lib', 'gmailwatcher.app'],
     package_data = {'gmailwatcher': data_files},
     data_files = [('share/indicators/messages/applications/', ['data/indicators/gmailwatcher']),
-                  ('share/menu/', ['data/menu/gmailwatcher'])],
+                  ('share/menu/', ['data/menu/gmailwatcher']),
+                  ('share/glib-2.0/schemas', ['data/schemas/apps.gmailwatcher.gschema.xml'])],
     cmdclass={
         'build': build_extra.build_extra,
         },

@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: gmailwatcher\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-31 03:55+0530\n"
-"PO-Revision-Date: 2011-09-11 22:20+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2011-11-07 22:18+0000\n"
+"Last-Translator: zs.dani1@gmail.com <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-31 05:45+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2011-11-08 06:44+0000\n"
+"X-Generator: Launchpad (build 14231)\n"
 
 #: ../gmailwatcher/app/preferences.py:110
 msgid "Failed.. Try Again"
-msgstr ""
+msgstr "Sikertelen...Próbáld újra"
 
 #: ../gmailwatcher/app/preferences.py:157
 msgid "Loading..."
-msgstr ""
+msgstr "Töltés..."
 
 #: ../gmailwatcher/lib/consts.py:18
 msgid "Add an account"
-msgstr ""
+msgstr "Fiók hozzáadása"
 
 #: ../gmailwatcher/lib/consts.py:19
 #, python-format
@@ -38,17 +38,19 @@ msgstr ""
 
 #: ../gmailwatcher/lib/consts.py:25
 msgid "ZZZzzzz..."
-msgstr ""
+msgstr "ZZZZzzz..."
 
 #: ../gmailwatcher/lib/consts.py:26
 msgid ""
 "If you need me again, you can find me by clicking the messaging icon in the "
 "top panel."
 msgstr ""
+"Ha szükséged van rám megint, megtalálsz engem kattintva az üzenetek ikonra a "
+"felső panelen."
 
 #: ../gmailwatcher/lib/consts.py:31 ../data/shared/ui/MainApp.glade.h:3
 msgid "Gmail Watcher"
-msgstr ""
+msgstr "Gmail figyelő"
 
 #: ../gmailwatcher/lib/consts.py:32
 msgid ""
@@ -58,7 +60,7 @@ msgstr ""
 
 #: ../gmailwatcher/lib/consts.py:36
 msgid "New Mail"
-msgstr ""
+msgstr "Új e-mail"
 
 #: ../gmailwatcher/lib/consts.py:36
 #, python-format
@@ -67,7 +69,7 @@ msgstr ""
 
 #: ../gmailwatcher/lib/consts.py:39
 msgid "There is a problem!"
-msgstr ""
+msgstr "Van egy probléma!"
 
 #: ../gmailwatcher/lib/consts.py:40
 #, python-format
@@ -77,26 +79,31 @@ msgid ""
 "* IMAP is enabled in Gmail\n"
 "* 'All Mail' folder is visible to IMAP clients\n"
 msgstr ""
+"Nem sikerült elérni a fiókot% s. \n"
+"Kérjük, erősítse meg, hogy \n"
+" A hitelesítő adatok helyesek\n"
+" * IMAP engedélyezve van Gmailban \n"
+"* \"Összes levél\" mappa látható IMAP ügyfelek\n"
 
 #: ../data/shared/ui/MainApp.glade.h:1
 msgid "About GmailWatcher"
-msgstr ""
+msgstr "A GmailWatcher-ről"
 
 #: ../data/shared/ui/MainApp.glade.h:2
 msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
-msgstr ""
+msgstr "Copyright © 2010-2011 Owais Lone hello@owaislone.org"
 
 #: ../data/shared/ui/MainApp.glade.h:4
 msgid "Gmail and Google apps mail notifier for Linux"
-msgstr ""
+msgstr "Gmail és a Google Apps- mail értesítő Linuxra"
 
 #: ../data/shared/ui/MainApp.glade.h:5
 msgid "Homepage"
-msgstr ""
+msgstr "Kezdőlap"
 
 #: ../data/shared/ui/MainApp.glade.h:6
 msgid "Notifications"
-msgstr ""
+msgstr "Értesítések"
 
 #: ../data/shared/ui/MainApp.glade.h:7
 #: ../data/shared/ui/Preferences.glade.h:12
@@ -120,19 +127,19 @@ msgstr ""
 
 #: ../data/shared/ui/MainApp.glade.h:20
 msgid "Turn off the switch to stop looking for new mail."
-msgstr ""
+msgstr "Kapcsolja ki a kapcsolót, hogy ne keressen új emailt."
 
 #: ../data/shared/ui/MainApp.glade.h:21
 msgid "_GmailWatcher"
-msgstr ""
+msgstr "_GmailWatcher"
 
 #: ../data/shared/ui/MainApp.glade.h:22
 msgid "_Help"
-msgstr ""
+msgstr "_Segítség"
 
 #: ../data/shared/ui/MainApp.glade.h:23
 msgid "_View"
-msgstr ""
+msgstr "_Megjelenítés"
 
 #: ../data/shared/ui/Preferences.glade.h:1
 msgid "Accounts"
@@ -140,15 +147,15 @@ msgstr "Fiókok"
 
 #: ../data/shared/ui/Preferences.glade.h:2
 msgid "Add..."
-msgstr ""
+msgstr "Hozzáad..."
 
 #: ../data/shared/ui/Preferences.glade.h:3
 msgid "Autostart "
-msgstr ""
+msgstr "Inditás autómatikusan "
 
 #: ../data/shared/ui/Preferences.glade.h:4
 msgid "Check"
-msgstr ""
+msgstr "Ellenőrzés"
 
 #: ../data/shared/ui/Preferences.glade.h:5
 msgid "Display Name"
@@ -160,7 +167,7 @@ msgstr "Email"
 
 #: ../data/shared/ui/Preferences.glade.h:7
 msgid "Folder"
-msgstr ""
+msgstr "Könyvtár"
 
 #: ../data/shared/ui/Preferences.glade.h:8
 msgid "Folders"
@@ -168,11 +175,11 @@ msgstr "Mappák"
 
 #: ../data/shared/ui/Preferences.glade.h:9
 msgid "INBOX"
-msgstr ""
+msgstr "Bejövő"
 
 #: ../data/shared/ui/Preferences.glade.h:10
 msgid "Load Gmail Folders"
-msgstr ""
+msgstr "Gmail könyvtárak töltése"
 
 #: ../data/shared/ui/Preferences.glade.h:11
 msgid "Password"
@@ -180,4 +187,4 @@ msgstr "Jelszó"
 
 #: ../data/shared/ui/Preferences.glade.h:13
 msgid "Remove..."
-msgstr ""
+msgstr "Eltávolítás..."

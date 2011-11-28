@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="apps.gmailwatcher" path="/apps/gmailwatcher/">
+    <key type="as" name="accounts">
+      <default>[]</default>
+      <summary>accounts</summary>
+      <description>Email addreses of accounts</description>
+    </key>
+
+    <key type="a{ss}" name="display-names">
+      <default>{}</default>
+      <summary>display-names</summary>
+      <description>Display names of acounts</description>
+    </key>
+
+    <key type="a{sa(bs)}" name="folders">
+      <default>{}</default>
+      <summary>folders</summary>
+      <description>Email addreses of accounts</description>
+    </key>
+
+    <key type="a{sa{sd}}" name="last-checks">
+      <default>{}</default>
+      <summary>last checks</summary>
+      <description>Remembers when the folders where checked last time</description>
+    </key>
+
+  </schema>
+</schemalist>

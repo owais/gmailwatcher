@@ -48,10 +48,10 @@ class MainApp(object):
         self.about_dialog = self.builder.get_object('aboutdialog')
         self.about_dialog.connect('close', self.on_about_close)
         self.toolbar = self.builder.get_object('toolbar')
+        self.folder_treeview = self.builder.get_object('folders_treeview')
         self.accounts_list = self.builder.get_object('accounts_list')
         self.accounts_combo = self.builder.get_object('accounts_combo')
 
-        # Setup custom progress bar style
         self.progressbar = self.builder.get_object('progressbar')
         css_provider = Gtk.CssProvider()
         css_provider.load_from_path(get_builder('css/gtk-widgets.css'))
@@ -63,6 +63,7 @@ class MainApp(object):
         self.prefs.dialog.set_transient_for(self.main_window)
         self.watchers = {}
         self.progress_fractions = {}
+        self.liststores = {}
 
         # Indicators
         self.indicator = new_application_indicator(self)
@@ -102,6 +103,9 @@ class MainApp(object):
             self.indicator.add_indicator(account, values['display_name'])
             self.progress_fractions[account] = 0.0
             self.accounts_list.append([account])
+            liststore = self.get_liststore(account)
+            self.folder_treeview.set_model(liststore)
+        self.active_account = account
         self.setup_watchers()
 
     def setup_watchers(self):
@@ -141,6 +145,7 @@ class MainApp(object):
         for account, watcher in self.watchers.items():
             watcher.kill()
             self.watchers.pop(account)
+        self.liststores = {}
         self.finish_initialization()
         self.setup_webkit()
 
@@ -176,6 +181,17 @@ class MainApp(object):
         for account, watcher in self.watchers.items():
             self.watchers.pop(account)
             watcher.kill()
+
+    def get_liststore(self, account):
+        if not account in self.liststores:
+            liststore = Gtk.ListStore.new([
+                    GObject.TYPE_STRING, GObject.TYPE_STRING])
+            folders = self.prefs.preferences['accounts'][account]['folders']
+            [liststore.append([folder, '']) for on, folder in folders if on]
+            self.liststores[account] = liststore
+        else:
+            liststore = self.liststores[account]
+        return liststore
 
     def update_last_checked_time(self, account, folder, timestamp):
         """
@@ -226,6 +242,14 @@ class MainApp(object):
                         "%s\n%s" % (mail['from'], mail['subject']),
                         "gmailwatcher")
                     self.notify(notif_tuple[0], notif_tuple[1])
+        self.highlight_folder(account, folder)
+
+    def highlight_folder(self, account, folder):
+        liststore = self.liststores[account]
+        for row in liststore:
+            _iter = liststore.get_iter(row.path)
+            if folder == liststore.get_value(_iter, 0):
+                liststore.set_value(_iter, 1, 'gtk-info')
 
     def play_sound(self):
         pass
@@ -293,7 +317,18 @@ class MainApp(object):
         _iter = widget.get_active_iter()
         if _iter:
             account = self.accounts_list.get_value(_iter, 0)
+            self.active_account = account
+            liststore = self.get_liststore(account)
+            self.folder_treeview.set_model(liststore)
             self.webview.show_account(account)
+
+    def on_folder_changed(self, widget, data=None):
+        selection = widget.get_selection()
+        store, _iter = selection.get_selected()
+        if _iter:
+            store.set_value(_iter, 1, '')
+            folder = store.get_value(_iter, 0)
+            self.webview.show_folder(self.active_account, folder)
 
     def on_window_focus(self, widget, data=None):
         self.indicator.reset_indicators()

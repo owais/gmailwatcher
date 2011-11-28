@@ -1,4 +1,4 @@
-# Tamil translation for gmailwatcher
+# Polish translation for gmailwatcher
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the gmailwatcher package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
@@ -8,26 +8,26 @@ msgstr ""
 "Project-Id-Version: gmailwatcher\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-31 03:55+0530\n"
-"PO-Revision-Date: 2011-11-16 13:01+0000\n"
-"Last-Translator: Naveen Kumar R <Unknown>\n"
-"Language-Team: Tamil <ta@li.org>\n"
+"PO-Revision-Date: 2011-11-11 19:32+0000\n"
+"Last-Translator: Tofi <Unknown>\n"
+"Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-11-17 06:04+0000\n"
-"X-Generator: Launchpad (build 14291)\n"
+"X-Launchpad-Export-Date: 2011-11-12 05:32+0000\n"
+"X-Generator: Launchpad (build 14277)\n"
 
 #: ../gmailwatcher/app/preferences.py:110
 msgid "Failed.. Try Again"
-msgstr "தோல்வி .. மீண்டும் முயற்சிக்கவும்"
+msgstr "Zakończono niepowodzeniem... Sróbuj jeszcze raz."
 
 #: ../gmailwatcher/app/preferences.py:157
 msgid "Loading..."
-msgstr ""
+msgstr "Wczytywanie..."
 
 #: ../gmailwatcher/lib/consts.py:18
 msgid "Add an account"
-msgstr ""
+msgstr "Dodaj konto"
 
 #: ../gmailwatcher/lib/consts.py:19
 #, python-format
@@ -35,39 +35,46 @@ msgid ""
 "Hey %s, I don't have any accounts to watch over right now.Please add a gmail "
 "or google apps account and I'll let you know about any new messages."
 msgstr ""
+"%s, nie mam podanych żadnych kont do sprawdzenia. Proszę dodaj konto gmail "
+"lub google apps, a powiadomię Cię o nowych wiadomościach."
 
 #: ../gmailwatcher/lib/consts.py:25
 msgid "ZZZzzzz..."
-msgstr ""
+msgstr "Proszę czekać..."
 
 #: ../gmailwatcher/lib/consts.py:26
 msgid ""
 "If you need me again, you can find me by clicking the messaging icon in the "
 "top panel."
 msgstr ""
+"Jeżeli będziesz mnie znów potrzebować, to znajdziesz mnie klikając ikonę "
+"wiadomości na górnym panelu."
 
 #: ../gmailwatcher/lib/consts.py:31 ../data/shared/ui/MainApp.glade.h:3
 msgid "Gmail Watcher"
-msgstr ""
+msgstr "Dozorca Gmail"
 
 #: ../gmailwatcher/lib/consts.py:32
 msgid ""
 "I'm now watching out for new mail and will stay hidden until you need me. "
 "You can find me by clicking the message icon above."
 msgstr ""
+"Sprawdzam, czy nie pojawiły się nowe wiadomości i pozostanę w ukryciu, "
+"dopóki nie będziesz mnie potrzebować. Znajdziesz mnie klikając ikonę "
+"wiadomości na górnym panelu."
 
 #: ../gmailwatcher/lib/consts.py:36
 msgid "New Mail"
-msgstr ""
+msgstr "Nowa wiadomość"
 
 #: ../gmailwatcher/lib/consts.py:36
 #, python-format
 msgid "%(count)d new messages in %(folder)s"
-msgstr ""
+msgstr "%(count)d nowych wiadomości w %(folder)s"
 
 #: ../gmailwatcher/lib/consts.py:39
 msgid "There is a problem!"
-msgstr "ஒரு பிரச்சனை இருக்கிறது!"
+msgstr "Wystąpił problem!"
 
 #: ../gmailwatcher/lib/consts.py:40
 #, python-format
@@ -77,31 +84,35 @@ msgid ""
 "* IMAP is enabled in Gmail\n"
 "* 'All Mail' folder is visible to IMAP clients\n"
 msgstr ""
+"Nie mogę uzyskać dostępu do konta %s. Proszę sprawdzić czy:\n"
+"* parametry logowania są poprawne\n"
+"* IMAP jest włączony w Gmail\n"
+"* katalog 'Wszystkie' jest widoczny dla klientów IMAP\n"
 
 #: ../data/shared/ui/MainApp.glade.h:1
 msgid "About GmailWatcher"
-msgstr "ஜிமெயில் வாட்சர் பற்றி"
+msgstr "O Dozorcy Gmail"
 
 #: ../data/shared/ui/MainApp.glade.h:2
 msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
-msgstr "பதிப்புரிமை © 2010-2011 Owais Lone hello@owaislone.org."
+msgstr "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
 
 #: ../data/shared/ui/MainApp.glade.h:4
 msgid "Gmail and Google apps mail notifier for Linux"
-msgstr "ஜிமெயில்  மற்றும் லினக்ஸ்க்கான கூகிள் விண்ணப்ப மின்னஞ்சல் அறிவிப்பு"
+msgstr "Aplikacja sprawdzająca Gmail i Google apps dla Linuksa"
 
 #: ../data/shared/ui/MainApp.glade.h:5
 msgid "Homepage"
-msgstr "முகப்பு பக்கம்"
+msgstr "Strona domowa"
 
 #: ../data/shared/ui/MainApp.glade.h:6
 msgid "Notifications"
-msgstr ""
+msgstr "Powiadomienia"
 
 #: ../data/shared/ui/MainApp.glade.h:7
 #: ../data/shared/ui/Preferences.glade.h:12
 msgid "Preferences"
-msgstr "விருப்பத்தேர்வுகள்"
+msgstr "Preferencje"
 
 #: ../data/shared/ui/MainApp.glade.h:8
 msgid ""
@@ -117,67 +128,78 @@ msgid ""
 "You should have received a copy of the GNU General Public License along \n"
 "with this program.  If not, see <http://www.gnu.org/licenses/>.\n"
 msgstr ""
+"Ten program jest wolnym oprogramowaniem: możesz go rozpowszechniać\n"
+"i/lub modyfikować na warunkach określonych w GNU General Public License\n"
+"wersja 3, opublikowanej przez by the Free Software Foundation.\n"
+"\n"
+"Ten program jest rozpowszechniany w nadziei, że będzie użytecznay, ale\n"
+"BEZ JAKIEJKOLWIEK GWARANCJI;  nawet bez gwarancji PRZYDATNOŚCI\n"
+"HANDLOWEJ, JAKOŚCI, PRZYDATNOŚCI DO OKREŚLONEGO CELU.\n"
+"Aby uzyskać więcej szczegółów zajrzyj do GNU General Public License.\n"
+"\n"
+"Wraz z programem powinieneś otrzymać kopię GNU General Public License.\n"
+"Jeśli nie, zobacz <http://www.gnu.org/licenses/>.\n"
 
 #: ../data/shared/ui/MainApp.glade.h:20
 msgid "Turn off the switch to stop looking for new mail."
-msgstr ""
+msgstr "Przesuń przełącznik aby zaprzestać sprawdzania nowej korespondencji."
 
 #: ../data/shared/ui/MainApp.glade.h:21
 msgid "_GmailWatcher"
-msgstr ""
+msgstr "Dozorca _Gmail"
 
 #: ../data/shared/ui/MainApp.glade.h:22
 msgid "_Help"
-msgstr ""
+msgstr "_Pomoc"
 
 #: ../data/shared/ui/MainApp.glade.h:23
 msgid "_View"
-msgstr ""
+msgstr "_Widok"
 
 #: ../data/shared/ui/Preferences.glade.h:1
 msgid "Accounts"
-msgstr "கணக்குகள்"
+msgstr "Konta"
 
 #: ../data/shared/ui/Preferences.glade.h:2
 msgid "Add..."
-msgstr ""
+msgstr "Dodaj..."
 
 #: ../data/shared/ui/Preferences.glade.h:3
 msgid "Autostart "
-msgstr ""
+msgstr "Uruchamiaj przy starcie systemu "
 
 #: ../data/shared/ui/Preferences.glade.h:4
 msgid "Check"
-msgstr ""
+msgstr "Sprawdź"
 
 #: ../data/shared/ui/Preferences.glade.h:5
 msgid "Display Name"
-msgstr "பெயரைக் காண்பி"
+msgstr "Nazwa wyświetlana"
 
 #: ../data/shared/ui/Preferences.glade.h:6
 msgid "Email"
-msgstr "மின்னஞ்சல்"
+msgstr "Adres e-mail"
 
 #: ../data/shared/ui/Preferences.glade.h:7
 msgid "Folder"
-msgstr ""
+msgstr "Katalog"
 
 #: ../data/shared/ui/Preferences.glade.h:8
 msgid "Folders"
-msgstr "கோப்புறைகள்"
+msgstr "Katalogi"
 
 #: ../data/shared/ui/Preferences.glade.h:9
 msgid "INBOX"
-msgstr ""
+msgstr "Skrzynka odbiorcza"
 
 #: ../data/shared/ui/Preferences.glade.h:10
 msgid "Load Gmail Folders"
-msgstr ""
+msgstr "Wczytaj katalogi Gmail"
 
 #: ../data/shared/ui/Preferences.glade.h:11
 msgid "Password"
-msgstr "கடவுச்சொல்"
+msgstr "Hasło"
 
 #: ../data/shared/ui/Preferences.glade.h:13
 msgid "Remove..."
-msgstr ""
+msgstr "Usuń..."

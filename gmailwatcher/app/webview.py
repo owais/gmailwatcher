@@ -47,6 +47,10 @@ class WebView(WebKit.WebView):
         js = """new_email(%s)""" % mail_json
         self.execute_script(js)
 
+    def show_folder(self, account, folder):
+        js = 'show_folder("%s", "%s");' % (account, folder)
+        self.execute_script(js)
+
     def show_account(self, account):
         js = 'show_account("%s");' % account
         self.execute_script(js)

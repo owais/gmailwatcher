@@ -23,15 +23,16 @@ body {
     background: #53514A;
     min-height:100%;
     height:auto;
-    display:inline;
+    /* display:inline; */
     z-index:10;
+    display:none;
 }
+
 
 #main {
     min-height:100%;
     height:auto;
     width:auto;
-    padding-left:180px;
 }
 
 select#accounts {

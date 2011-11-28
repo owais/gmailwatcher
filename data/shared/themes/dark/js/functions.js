@@ -72,6 +72,20 @@ var show_account = function(account) {
     $('ul.folders[account='+account_id+']').children().first().click();
 };
 
+var show_folder = function(account, folder) {
+    account_id = get_account_id(account)
+    $('ul.folders').hide();
+    $('ul.folders[account='+account_id+']').show();
+    account = accounts[account]
+    for (i in account.folders) {
+      if (account.folders[i] == folder) {
+        $('ul.folders[account='+account_id+']').find('li.folder[folder='+i+']').click();
+        return
+      }
+    }
+};
+
+
 
 $(document).ready(function() {
 

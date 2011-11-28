@@ -8,22 +8,22 @@ msgstr ""
 "Project-Id-Version: gmailwatcher\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-31 03:55+0530\n"
-"PO-Revision-Date: 2011-09-20 11:49+0000\n"
-"Last-Translator: nordstern <Unknown>\n"
+"PO-Revision-Date: 2011-11-16 13:20+0000\n"
+"Last-Translator: Irmak Bıçakçıgil <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-10-31 05:46+0000\n"
-"X-Generator: Launchpad (build 14197)\n"
+"X-Launchpad-Export-Date: 2011-11-17 06:04+0000\n"
+"X-Generator: Launchpad (build 14291)\n"
 
 #: ../gmailwatcher/app/preferences.py:110
 msgid "Failed.. Try Again"
-msgstr ""
+msgstr "Başarısız.. Tekrar Deneyin"
 
 #: ../gmailwatcher/app/preferences.py:157
 msgid "Loading..."
-msgstr ""
+msgstr "Yükleniyor..."
 
 #: ../gmailwatcher/lib/consts.py:18
 msgid "Add an account"
@@ -48,7 +48,7 @@ msgstr ""
 
 #: ../gmailwatcher/lib/consts.py:31 ../data/shared/ui/MainApp.glade.h:3
 msgid "Gmail Watcher"
-msgstr ""
+msgstr "Gmail Watcher"
 
 #: ../gmailwatcher/lib/consts.py:32
 msgid ""
@@ -67,7 +67,7 @@ msgstr ""
 
 #: ../gmailwatcher/lib/consts.py:39
 msgid "There is a problem!"
-msgstr ""
+msgstr "Bir sorun var!"
 
 #: ../gmailwatcher/lib/consts.py:40
 #, python-format
@@ -80,23 +80,23 @@ msgstr ""
 
 #: ../data/shared/ui/MainApp.glade.h:1
 msgid "About GmailWatcher"
-msgstr ""
+msgstr "GmailWatcher Hakkında"
 
 #: ../data/shared/ui/MainApp.glade.h:2
 msgid "Copyright © 2010-2011 Owais Lone  hello@owaislone.org."
-msgstr ""
+msgstr "Telif Hakkı © 2010-2011 Owais Lone  hello@owaislone.org."
 
 #: ../data/shared/ui/MainApp.glade.h:4
 msgid "Gmail and Google apps mail notifier for Linux"
-msgstr ""
+msgstr "Linux için Gmail ve Google bildirimleri"
 
 #: ../data/shared/ui/MainApp.glade.h:5
 msgid "Homepage"
-msgstr ""
+msgstr "Ana Sayfa"
 
 #: ../data/shared/ui/MainApp.glade.h:6
 msgid "Notifications"
-msgstr ""
+msgstr "Bildirimler"
 
 #: ../data/shared/ui/MainApp.glade.h:7
 #: ../data/shared/ui/Preferences.glade.h:12
@@ -124,15 +124,15 @@ msgstr ""
 
 #: ../data/shared/ui/MainApp.glade.h:21
 msgid "_GmailWatcher"
-msgstr ""
+msgstr "_GmailWatcher"
 
 #: ../data/shared/ui/MainApp.glade.h:22
 msgid "_Help"
-msgstr ""
+msgstr "_Yardım"
 
 #: ../data/shared/ui/MainApp.glade.h:23
 msgid "_View"
-msgstr ""
+msgstr "_Görünüm"
 
 #: ../data/shared/ui/Preferences.glade.h:1
 msgid "Accounts"
@@ -140,15 +140,15 @@ msgstr "Hesaplar"
 
 #: ../data/shared/ui/Preferences.glade.h:2
 msgid "Add..."
-msgstr ""
+msgstr "Ekle..."
 
 #: ../data/shared/ui/Preferences.glade.h:3
 msgid "Autostart "
-msgstr ""
+msgstr "Otomatik başlat "
 
 #: ../data/shared/ui/Preferences.glade.h:4
 msgid "Check"
-msgstr ""
+msgstr "Kontrol Et"
 
 #: ../data/shared/ui/Preferences.glade.h:5
 msgid "Display Name"
@@ -160,7 +160,7 @@ msgstr "E-Posta"
 
 #: ../data/shared/ui/Preferences.glade.h:7
 msgid "Folder"
-msgstr ""
+msgstr "Klasör"
 
 #: ../data/shared/ui/Preferences.glade.h:8
 msgid "Folders"
@@ -168,11 +168,11 @@ msgstr "Dizinler"
 
 #: ../data/shared/ui/Preferences.glade.h:9
 msgid "INBOX"
-msgstr ""
+msgstr "GELEN KUTUSU"
 
 #: ../data/shared/ui/Preferences.glade.h:10
 msgid "Load Gmail Folders"
-msgstr ""
+msgstr "Gmail Klasörlerini Yükle"
 
 #: ../data/shared/ui/Preferences.glade.h:11
 msgid "Password"
@@ -180,4 +180,4 @@ msgstr "Parola"
 
 #: ../data/shared/ui/Preferences.glade.h:13
 msgid "Remove..."
-msgstr ""
+msgstr "Kaldır..."

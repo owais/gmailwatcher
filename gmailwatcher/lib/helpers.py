@@ -16,15 +16,14 @@
 
 import os
 import sys
-import copy
 import json
 import keyring
 import gettext
 from time import time as now
-from gi.repository import GLib
+from gi.repository import GLib, Gio
 
 gettext.textdomain("gmailwatcher")
-
+_V = GLib.Variant
 
 USER_CONFIG_DIR = GLib.get_user_config_dir()
 CONFIG_DIR = "gmailwatcher"
@@ -33,13 +32,14 @@ BUILDER_PATH = 'shared/ui/'
 THEME_PATH = 'shared/themes/'
 THEME_INDEX = 'main.html'
 AUTOSTART_FILE = 'shared/autostart/gmailwatcher.desktop'
-DEFAULT_FOLDERS = [[True, 'INBOX'],]
+DEFAULT_FOLDERS = [(True, 'INBOX'),]
 DEFAULT_LAST_CHECK = now() - 2714331  # Go one month back
 DEFAULT_PREFERENCES = {
     'accounts': {},
     'preferences': {}
 }
-
+GSETTINGS_PATH = ('apps.gmailwatcher')
+settings = Gio.Settings.new(GSETTINGS_PATH)
 
 
 if os.path.abspath(__file__).startswith(sys.prefix):
@@ -85,27 +85,75 @@ def save_preferences(preferences):
     '''
         Saves python dictionary as json.
     '''
-    setup_config_dir()
-    _preferences = copy.deepcopy(preferences)
-    for email, value in _preferences['accounts'].items():
-        password = value.pop('password')
+    folders = {}
+    display_names = {}
+    last_checks = {}
+    accounts = []
+    for email, value in preferences['accounts'].items():
+        password = value.get('password')
         set_password(email, password)
-        value['display_name'] = value['display_name'] or email
-        value['folders'] = value['folders'] or DEFAULT_FOLDERS
-    preferences_str = json.dumps(_preferences, indent=2)
-    config_file = open(
-        os.path.join(
-            USER_CONFIG_DIR,
-            CONFIG_DIR,
-            CONFIG_FILE
-        ),
-        'w'
-    )
-    config_file.write(preferences_str)
-    config_file.close()
+        display_names[email] = value['display_name'] or email
+        folders[email] = value['folders'] or DEFAULT_FOLDERS
+        last_checks_list = value['last_checks']
 
+        for folder in folders[email]:
+            last_checks_list[folder[1]] = last_checks_list.get(
+                    folder[1],
+                    DEFAULT_LAST_CHECK
+                    )
+        last_checks[email] = last_checks_list
+        accounts.append(email)
+
+    settings.delay()
+    if accounts:
+        settings.set_value('accounts', _V('as', accounts))
+    else:
+        settings.reset('accounts')
+
+    if folders:
+        settings.set_value('folders', _V('a{sa(bs)}', folders))
+    else:
+        settings.reset('folders')
+
+    if display_names:
+        settings.set_value('display-names', _V('a{ss}', display_names))
+    else:
+        settings.reset('display-names')
+
+    if last_checks:
+        settings.set_value('last-checks', _V('a{sa{sd}}', last_checks))
+    else:
+        settings.reset('last-checks')
+    settings.apply()
 
 def load_preferences():
+    accounts = settings.get_value('accounts')
+    folders = settings.get_value('folders')
+    display_names = settings.get_value('display-names')
+    last_checks = settings.get_value('last-checks')
+
+
+    if not accounts:
+        preferences = migrate_from_json()
+        save_preferences(preferences)
+        return preferences
+
+    preferences = {}
+    preferences.update(DEFAULT_PREFERENCES)
+    for account in accounts:
+        account_dict = {}
+        if account in folders.keys():
+            account_dict['folders'] = folders[account]
+        if account in last_checks.keys():
+            account_dict['last_checks'] = last_checks[account]
+        if account in display_names.keys():
+            account_dict['display_name'] = display_names[account]
+        account_dict['password'] = get_password(account)
+        preferences['accounts'][account] = account_dict
+    return preferences
+
+
+def migrate_from_json():
     setup_config_dir()
     try:
         config_file = open(
@@ -129,7 +177,7 @@ def load_preferences():
     for email, values in preferences['accounts'].items():
         password = get_password(email)
         values['password'] = password
-        values['folders'] = values.get('folders', DEFAULT_FOLDERS)
+        values['folders'] = [tuple(folder) for folder in values.get('folders', DEFAULT_FOLDERS)]
         last_checks = values.get('last_checks', {})
         for folder in values['folders']:
             last_checks[folder[1]] = last_checks.get(

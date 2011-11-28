@@ -123,9 +123,10 @@ class PreferencesDialog(object):
                         self.folder_store.append([False, mailbox])
         M.logout()
 
-    def save_account(self, account):
+    def save_account(self, email, account):
         accounts = self.preferences.get('accounts', {})
-        accounts[self.email_form.get_text()] = account
+        accounts[email] = accounts.get(email, {'last_checks':{}})
+        accounts[email].update(account)
         self.preferences['accounts'] = accounts
         self.save_preferences()
         self.load_preferences()
@@ -174,7 +175,7 @@ class PreferencesDialog(object):
             if account['folders']:
                 self.save_button.set_sensitive(True)
             for folder in account['folders']:
-                self.folder_store.append([folder[0], folder[1]])
+                self.folder_store.append((folder[0], folder[1]))
             self.account_form.show()
         self.validate_form()
 
@@ -193,8 +194,8 @@ class PreferencesDialog(object):
                             for folder
                             in self.folder_store]
             }
-            self.save_account(account)
             email = self.email_form.get_text()
+            self.save_account(email, account)
             if not email in [row[0] for row in self.account_store]:
                 self.account_store.append([self.email_form.get_text()])
             self.account_form.hide()
